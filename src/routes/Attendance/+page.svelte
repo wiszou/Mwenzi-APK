@@ -34,6 +34,10 @@
     console.log(selectedSubject1 + "hahahahadfdsgdf");
   }
 
+  function navigate(URL) {
+    goto(URL);
+  }
+
   // async function loadSubject() {
   //   document.getElementById("classSelection").value = selectedSubject1;
   //   console.log(selectedSubject1 + "HAHAHAHAHAHAHAHAHAH");
@@ -121,17 +125,18 @@
   async function attendanceCheck(type) {
     presentCount = 0;
     absentCount = 0;
-    const date123 = document.getElementById("dateSelector1").value;
-
+    const date123 =
+      document.getElementById("dateSelector1").value || currentDatee;
+    console.log(date123);
+    console.log(currentDatee);
     if (type === 1) {
-
       const attendanceCollectionRef = collection(
         firestore,
         "Subject",
         `${selecTSub}`,
         "Attendance"
       );
-      const attendanceDocRef = doc(attendanceCollectionRef, currentDatee);
+      const attendanceDocRef = doc(attendanceCollectionRef, await currentDatee);
 
       return onSnapshot(attendanceDocRef, (attendanceDocSnapshot) => {
         attendance = Object.entries(attendanceDocSnapshot.data()).map(
@@ -166,8 +171,8 @@
         `${selecTSub}`,
         "Attendance"
       );
-       
-      const attendanceDocRef = doc(attendanceCollectionRef, date123);
+
+      const attendanceDocRef = doc(attendanceCollectionRef, await date123);
       return onSnapshot(attendanceDocRef, (attendanceDocSnapshot) => {
         attendance = Object.entries(attendanceDocSnapshot.data()).map(
           ([key, value]) => ({
@@ -277,7 +282,7 @@
   }
 
   function getDate() {
-    fetch("http://worldtimeapi.org/api/timezone/Asia/Manila")
+    fetch("https://worldtimeapi.org/api/timezone/Asia/Manila")
       .then((response) => response.json())
       .then((data) => {
         // Extract the date components
@@ -461,7 +466,7 @@
       console.log(userUID);
       getuserName(userUID);
       classCheck();
-      attendanceCheck(1);
+      getDate();
       return () => {
         unsubscribe();
       };
@@ -494,7 +499,6 @@
 
     // newPage();
   });
-  getDate();
 </script>
 
 <body class=" bg-gray-50 h-screen">
@@ -531,9 +535,7 @@
               class="text-center rounded-2xl mt-2 dropdown-content shadow bg-base-100 w-24"
             >
               <li class="rounded-2xl hover:bg-gray-200">
-                <a
-                  href="/Login"
-                  class="py-1 flex justify-center font-medium text-sm"
+                <a class="py-1 flex justify-center font-medium text-sm"
                   >Log out</a
                 >
               </li>
@@ -682,9 +684,9 @@
       </button>
 
       <button
+        on:click={(event) => navigate("/Points")}
         type="button"
         class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group"
-        onclick="window.location.href='/Points'"
       >
         <svg
           class="w-6 h-6 mb-1 text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500"
@@ -706,6 +708,7 @@
         >
       </button>
       <button
+        on:click={(event) => navigate("/Notes")}
         type="button"
         class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group"
       >
@@ -726,6 +729,7 @@
         >
       </button>
       <button
+        on:click={(event) => navigate("/Actions")}
         type="button"
         class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group"
       >

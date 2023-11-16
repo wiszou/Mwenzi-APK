@@ -27,6 +27,10 @@
   import { current_component } from "svelte/internal";
   import toast, { Toaster } from "svelte-french-toast";
 
+  function navigate(URL) {
+    goto(URL);
+  }
+
   let userUID = "";
   let selecTSub;
   let docsArray = [];
@@ -149,7 +153,7 @@
   }
 
   function getDate() {
-    fetch("http://worldtimeapi.org/api/timezone/Asia/Manila")
+    fetch("https://worldtimeapi.org/api/timezone/Asia/Manila")
       .then((response) => response.json())
       .then((data) => {
         // Extract the date components
@@ -390,9 +394,7 @@
               class="text-center rounded-2xl mt-2 dropdown-content shadow bg-base-100 w-24"
             >
               <li class="rounded-2xl hover:bg-gray-200">
-                <a
-                  href="/Login"
-                  class=" py-1 flex justify-center font-medium text-sm"
+                <a class=" py-1 flex justify-center font-medium text-sm"
                   >Log out</a
                 >
               </li>
@@ -432,8 +434,9 @@
     </select>
   </div>
   <div class="mt-6 flex w-full justify-start pl-6">
-    <button class="bg-red-500 rounded-3xl text-sm text-white w-24 h-6" on:click={resetRecitationPoints}
-      >Reset Points</button
+    <button
+      class="bg-red-500 rounded-3xl text-sm text-white w-24 h-6"
+      on:click={resetRecitationPoints}>Reset Points</button
     >
   </div>
   <div class="mt-2 px-4 items-center text-center h-3/4 overflow-y-auto">
@@ -495,7 +498,7 @@
       <button
         type="button"
         class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group"
-        onclick="window.location.href='/Attendance'"
+        on:click={(event) => navigate("/Attendance")}
       >
         <svg
           class="w-6 h-6 mb-1 text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500"
@@ -540,7 +543,7 @@
       <button
         type="button"
         class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group"
-        onclick="window.location.href='/Notes'"
+        on:click={(event) => navigate("/Notes")}
       >
         <svg
           class="w-6 h-6 mb-1 text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500"
@@ -561,7 +564,7 @@
       <button
         type="button"
         class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group"
-        onclick="window.location.href='/Actions'"
+        on:click={(event) => navigate("/Actions")}
       >
         <svg
           class="w-6 h-6 mb-1 text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500"

@@ -1,0 +1,5 @@
+include ':app'
+include ':capacitor-cordova-android-plugins'
+include ':capacitor-android'
+rootProject.name = 'Mwenzi App'
+apply from: 'capacitor.settings.gradle' // Make sure this line is present

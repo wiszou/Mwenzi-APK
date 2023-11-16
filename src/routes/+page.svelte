@@ -17,6 +17,7 @@
   import { onMount } from "svelte";
   import { browser } from "$app/environment";
   import toast, { Toaster } from "svelte-french-toast";
+  import { goto } from "$app/navigation";
 
   let email = "";
   let password = "";
@@ -29,6 +30,7 @@
       return; // Exit the function
     }
 
+    toast.success("Logging In");
     const q = query(
       collection(firestore, "users"),
       where("email", "==", email)
@@ -48,7 +50,7 @@
             const userUID = userData.UID;
             userId.set(userUID);
             const userUID1 = localStorage.getItem("userId");
-            window.location.replace("../Attendance");
+            goto("../Attendance");
           } else {
             console.log("Wrong Password");
             toast.error("Wrong Password");
@@ -64,27 +66,6 @@
         toast.log("User not found");
       }
     });
-
-    // if (querySnapshot.exists()) {
-    // 	const userData = docSnap.data();
-    // 	console.log('Document data:', userData);
-
-    // 	if (userData.userRole === 'student') {
-    // 		console.log('User is a Student');
-    // 		toast.success('Log In Successful');
-    // 		userId.set(userID);
-    // 		userUID = localStorage.getItem('userId');
-    // 		console.log(userUID);
-    // 		window.location.replace('../Student-Dashboard');
-    // 	} else {
-    // 		console.log('User is not a Student');
-    // 		toast.error('User is not a Student');
-    // 		// Handle case when user is not a teacher
-    // 	}
-    // } else {
-    // 	console.log('No such document!');
-    // 	toast.error('No such document!');
-    // }
   }
 
   onMount(() => {

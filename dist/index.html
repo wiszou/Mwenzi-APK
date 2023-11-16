@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="./favicon.png" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, viewport-fit=cover" />
+    
+		<link href="./_app/immutable/assets/0.96a59e84.css" rel="stylesheet">
+		<link href="./_app/immutable/assets/navigation.3a6d0da3.css" rel="stylesheet">
+		<link rel="modulepreload" href="./_app/immutable/entry/start.60cadf9f.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/scheduler.542a8b70.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/singletons.c911c07e.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/app.e7c01df5.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/index.def341b4.js">
+		<link rel="modulepreload" href="./_app/immutable/nodes/0.10cf111a.js">
+		<link rel="modulepreload" href="./_app/immutable/nodes/2.4377f024.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/navigation.51511263.js">
+    <style>
+      * {
+        box-sizing: border-box;
+
+        /* disable text selection (svg icons are also text...) */
+        -webkit-user-select: none;
+        /* Safari */
+        -ms-user-select: none;
+        /* IE 10 and IE 11 */
+        user-select: none;
+        /* Standard syntax */
+
+        /* preventing the long press context menu, https://stackoverflow.com/a/56866766/3022127 */
+        -webkit-touch-callout: none !important;
+        -webkit-user-select: none !important;
+
+        /* preventing iOS tap highlight */
+        -webkit-tap-highlight-color: transparent;
+
+        /* Disable browser handling of all panning and zooming gestures, except for regular scrolling */
+        touch-action: pan-y;
+      }
+    </style>
+  </head>
+  <body data-sveltekit-preload-data="hover">
+    <div style="display: contents">  <div class="pb-5 flex items-center justify-center min-h-screen px-5 bg-gray-100"><div class="container mx-auto"><div class="max-w-md mx-auto"><div class="text-center" data-svelte-h="svelte-1xljvve"><img src="Mwenzi5.png" class="h-auto max-w-full duration-500 hover:scale-105 hover:-translate-10" alt="..."></div> <div class="m-7"><form><div class="mb-4"><label for="email" class="block mb-2 text-md font-medium text-gray" data-svelte-h="svelte-lgsm1b">Email</label> <input type="email" name="email" id="email" placeholder="Email" class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-3xl focus:outline-none" value=""></div> <div class="mb-5"><label for="password" class="block mb-2 text-md font-medium text-gray" data-svelte-h="svelte-1mnn4ft">Password</label> <input type="password" name="password" id="password" placeholder="Password" class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-3xl focus:outline-none" value=""></div> <button class="w-full px-3 py-4 mt-1 text-white bg-[#2ea44f] focus:outline-none font-medium rounded-3xl hover:bg-[#1e7d3f] duration-300 hover:scale-105" data-svelte-h="svelte-opgp6y">Log In</button></form></div></div></div></div> <div class="toaster  svelte-1phplh9" role="alert"> </div> 
+			
+			<script>
+				{
+					__sveltekit_yey0jb = {
+						base: new URL(".", location).pathname.slice(0, -1),
+						env: {}
+					};
+
+					const element = document.currentScript.parentElement;
+
+					const data = [null,null];
+
+					Promise.all([
+						import("./_app/immutable/entry/start.60cadf9f.js"),
+						import("./_app/immutable/entry/app.e7c01df5.js")
+					]).then(([kit, app]) => {
+						kit.start(app, element, {
+							node_ids: [0, 2],
+							data,
+							form: null,
+							error: null
+						});
+					});
+				}
+			</script>
+		</div>
+  </body>
+</html>

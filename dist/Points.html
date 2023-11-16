@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="./favicon.png" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, viewport-fit=cover" />
+    
+		<link href="./_app/immutable/assets/0.96a59e84.css" rel="stylesheet">
+		<link href="./_app/immutable/assets/navigation.3a6d0da3.css" rel="stylesheet">
+		<link rel="modulepreload" href="./_app/immutable/entry/start.60cadf9f.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/scheduler.542a8b70.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/singletons.c911c07e.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/app.e7c01df5.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/index.def341b4.js">
+		<link rel="modulepreload" href="./_app/immutable/nodes/0.10cf111a.js">
+		<link rel="modulepreload" href="./_app/immutable/nodes/6.8fda96b4.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/navigation.51511263.js">
+    <style>
+      * {
+        box-sizing: border-box;
+
+        /* disable text selection (svg icons are also text...) */
+        -webkit-user-select: none;
+        /* Safari */
+        -ms-user-select: none;
+        /* IE 10 and IE 11 */
+        user-select: none;
+        /* Standard syntax */
+
+        /* preventing the long press context menu, https://stackoverflow.com/a/56866766/3022127 */
+        -webkit-touch-callout: none !important;
+        -webkit-user-select: none !important;
+
+        /* preventing iOS tap highlight */
+        -webkit-tap-highlight-color: transparent;
+
+        /* Disable browser handling of all panning and zooming gestures, except for regular scrolling */
+        touch-action: pan-y;
+      }
+    </style>
+  </head>
+  <body data-sveltekit-preload-data="hover">
+    <div style="display: contents">  <body class="bg-gray-50 h-screen"><header class="text-gray-600 body-font" data-svelte-h="svelte-1wnsn1n"> <div class="mx-6 flex flex-wrap pt-5 flex-col md:flex-row items-center"><div class="w-full flex flex-row justify-between"><nav class="flex"> <img src="Mwenzi5.png" class="h-14 pb-2" alt="..."></nav> <div class="flex flex-row"><p class="font-medium text-md my-auto mr-3" id="userName">Hi, Mwenzi Teacher</p> <button class="dropdown dropdown-end"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="green" class="bi bi-person-circle" viewBox="0 0 16 16"><path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"></path><path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"></path></svg>  <ul tabindex="0" class="text-center rounded-2xl mt-2 dropdown-content shadow bg-base-100 w-24"><li class="rounded-2xl hover:bg-gray-200"><a class="py-1 flex justify-center font-medium text-sm">Log out</a></li></ul></button></div></div></div></header> <div class="flex justify-center mt-4 mx-6"><select id="classSelection" class="select select-bordered font-medium focus:outline-1 w-full rounded-3xl max-w-xs"><option disabled selected value="Select Class" data-svelte-h="svelte-nnppqb">Select Class</option></select> <select id="SortRec" class="w-56 h-12 font-medium text-sm rounded-3xl text-center mx-2 px-2 border border-gray-300 focus:outline-1 focus:outline-gray-300"><option selected class="rounded-3xl" value="Total Points" data-svelte-h="svelte-10rrb4u">Total Points</option><option class="rounded-xl" value="Daily" data-svelte-h="svelte-1le78di">Daily</option><option class="rounded-xl" value="Weekly" data-svelte-h="svelte-1knbarg">Weekly</option></select></div> <div class="mt-6 flex w-full justify-start pl-6"><button class="bg-red-500 rounded-3xl text-sm text-white w-24 h-6" data-svelte-h="svelte-11txb4r">Reset Points</button></div> <div class="mt-2 px-4 items-center text-center h-3/4 overflow-y-auto"><table class="text-sm text-gray-500 dark:text-gray-400 w-full rounded-lg shadow-sm"><thead class="text-xs text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-400 sticky top-0" data-svelte-h="svelte-w58x6w"><tr><th scope="col" class="px-6 py-4 text-left">Rank</th> <th scope="col" class="px-6 py-4 text-center">Student</th> <th scope="col" class="px-6 py-4 text-center">Points</th> <th scope="col" class="px-6 py-4 text-center">Update</th></tr></thead> <tbody></tbody></table></div>  <div class="fixed bottom-0 left-0 z-50 w-full h-16 bg-white border-t border-gray-200 dark:bg-gray-700 dark:border-gray-600"><div class="grid h-full max-w-lg grid-cols-4 mx-auto font-medium"><button type="button" class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group" data-svelte-h="svelte-56vecb"><svg class="w-6 h-6 mb-1 text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path></svg> <span class="text-sm text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500">Attendance</span></button> <button type="button" class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group" data-svelte-h="svelte-vg1rqy"><svg class="w-6 h-6 mb-1 text-blue-500 dark:text-blue-400 group-hover:text-blue-600 dark:group-hover:text-blue-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z"></path><path clip-rule="evenodd" fill-rule="evenodd" d="M18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z"></path></svg> <span class="text-sm text-blue-500 dark:text-blue-400 group-hover:text-blue-600 dark:group-hover:text-blue-500">Points</span></button> <button type="button" class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group" data-svelte-h="svelte-1v6rxq8"><svg class="w-6 h-6 mb-1 text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M5 4a1 1 0 00-2 0v7.268a2 2 0 000 3.464V16a1 1 0 102 0v-1.268a2 2 0 000-3.464V4zM11 4a1 1 0 10-2 0v1.268a2 2 0 000 3.464V16a1 1 0 102 0V8.732a2 2 0 000-3.464V4zM16 3a1 1 0 011 1v7.268a2 2 0 010 3.464V16a1 1 0 11-2 0v-1.268a2 2 0 010-3.464V4a1 1 0 011-1z"></path></svg> <span class="text-sm text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500">Notes</span></button> <button type="button" class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group" data-svelte-h="svelte-1oev89m"><svg class="w-6 h-6 mb-1 text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path clip-rule="evenodd" fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z"></path></svg> <span class="text-sm text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500">Actions</span></button></div></div> <div class="toaster  svelte-1phplh9" role="alert"> </div> </body> 
+			
+			<script>
+				{
+					__sveltekit_yey0jb = {
+						base: new URL(".", location).pathname.slice(0, -1),
+						env: {}
+					};
+
+					const element = document.currentScript.parentElement;
+
+					const data = [null,null];
+
+					Promise.all([
+						import("./_app/immutable/entry/start.60cadf9f.js"),
+						import("./_app/immutable/entry/app.e7c01df5.js")
+					]).then(([kit, app]) => {
+						kit.start(app, element, {
+							node_ids: [0, 6],
+							data,
+							form: null,
+							error: null
+						});
+					});
+				}
+			</script>
+		</div>
+  </body>
+</html>
