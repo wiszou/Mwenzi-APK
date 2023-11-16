@@ -1,3 +1,361 @@
+<script>
+  import { auth, database } from "$lib/firebase";
+  import {
+    doc,
+    setDoc,
+    query,
+    where,
+    getDocs,
+    collection,
+    getDoc,
+    onSnapshot,
+    updateDoc,
+    addDoc,
+    deleteDoc,
+  } from "firebase/firestore";
+  import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+  import { goto } from "$app/navigation";
+  import { firebase, firestore, functions } from "$lib/firebase";
+  import { getDatabase, ref, onValue, get, child } from "firebase/database";
+  import {
+    subjectSelected1,
+    userId,
+    timeFrom,
+    timeTo,
+  } from "../../lib/userStorage";
+  import { onMount } from "svelte";
+  import { current_component } from "svelte/internal";
+  import toast, { Toaster } from "svelte-french-toast";
+
+  let userUID = "";
+  let selecTSub;
+  let docsArray = [];
+  let attendance = [];
+  let nameArray = [];
+  let recitation = [];
+  let attendanceDates = [];
+  let currentDatee;
+  let dateSelected;
+
+  async function classCheck() {
+    const collectionRef = collection(firestore, "Subject");
+    const queryRef = query(collectionRef, where("teacherID", "==", userUID));
+    const querySnapshot = await getDocs(queryRef);
+
+    docsArray = querySnapshot.docs.map((doc) => ({
+      id: doc.id,
+      data: doc.data(),
+    }));
+  }
+
+  async function resetRecitationPoints() {
+    const attendanceCollectionRef = collection(
+      firestore,
+      "Subject",
+      `${selecTSub}`,
+      "Recitation"
+    );
+
+    const querySnapshot = await getDocs(attendanceCollectionRef);
+
+    querySnapshot.forEach(async (doc) => {
+      const docRef = doc.ref;
+      await updateDoc(docRef, {
+        totalPoints: 0, // Set to the desired value for totalPoints
+        day: null, // Set to the desired value for day
+        week: null, // Set to the desired value for week
+      });
+    });
+
+    toast.success("Points reset successfully.");
+  }
+
+  async function recitationCheck() {
+    const selectOption = document.getElementById("SortRec").value;
+    const attendanceCollectionReflll = collection(
+      firestore,
+      "Subject",
+      `${selecTSub}`,
+      "Recitation"
+    );
+    return onSnapshot(attendanceCollectionReflll, (snapshot) => {
+      recitation = [];
+      // Clear the recitation array before populating it again
+      snapshot.forEach((doc) => {
+        const documentData = doc.data();
+        const documentName = doc.id;
+        const totalPoints = documentData.totalPoints;
+        const week = documentData.week || 0;
+        const day = documentData.day || 0;
+
+        const documentInfo = {
+          id: documentName,
+          totalPoints: totalPoints,
+          week: week,
+          day: day,
+        };
+
+        recitation.push(documentInfo);
+      });
+
+      if (selectOption == "Total Points") {
+        recitation.sort((a, b) => b.totalPoints - a.totalPoints);
+
+        recitation.forEach((item, index) => {
+          item.ranking = index + 1;
+        });
+
+        console.log("Updated recitation array with ranking:", recitation);
+        console.log("recitation array:", recitation);
+      } else if (selectOption == "Weekly") {
+        recitation.sort((a, b) => b.week - a.week);
+
+        recitation.forEach((item, index) => {
+          item.ranking = index + 1;
+        });
+      } else if (selectOption == "Daily") {
+        recitation.sort((a, b) => b.day - a.day);
+
+        recitation.forEach((item, index) => {
+          item.ranking = index + 1;
+        });
+      }
+
+      fetchNamesTwo();
+    });
+  }
+
+  // Iterate over each object
+  async function fetchNamesTwo() {
+    const refer = collection(firestore, "users");
+    const ids = recitation.map((item) => item.id); // Extract all IDs from the recitation array
+
+    // Query the Firestore documents by IDs
+    const snapshot = await getDocs(refer, where("studentRFID", "in", ids));
+
+    snapshot.forEach((doc) => {
+      const id = doc.data().studentRFID;
+      const name = doc.data().firstName + " " + doc.data().lastName;
+
+      // Find the item in the recitation array with the matching ID
+      const item = recitation.find((el) => el.id === id);
+
+      if (item) {
+        // Update the name property for the matching item
+        item.name = name;
+      }
+    });
+    recitation = recitation;
+  }
+
+  function getDate() {
+    fetch("http://worldtimeapi.org/api/timezone/Asia/Manila")
+      .then((response) => response.json())
+      .then((data) => {
+        // Extract the date components
+        var currentDate = new Date(data.datetime);
+        var year = currentDate.getFullYear();
+        var month = currentDate.getMonth() + 1;
+        var day = currentDate.getDate();
+
+        // Format the date as desired (e.g., YYYY-MM-DD)
+        currentDatee =
+          year +
+          "-" +
+          month.toString().padStart(2, "0") +
+          "-" +
+          day.toString().padStart(2, "0");
+
+        console.log(currentDatee); // Output: 2023-05-26
+      })
+      .catch((error) => {
+        console.log("Error:", error);
+      });
+  }
+
+  async function changeDocumentID(action, documentID) {
+    const recitationCollectionReflllty = collection(
+      firestore,
+      "Subject",
+      `${selecTSub}`,
+      "Recitation"
+    );
+
+    if (action === "minus") {
+      const recitationDocRef = doc(recitationCollectionReflllty, documentID);
+
+      // Retrieve the document data
+      const docSnapshot = await getDoc(recitationDocRef);
+      if (docSnapshot.exists()) {
+        const docData = docSnapshot.data();
+
+        // Decrease the value of the totalPoint field by 1
+        const newTotalPoint = docData.totalPoints - 1;
+        const WeekTotalPoint = docData.week - 1;
+        const DayTotalPoint = docData.day - 1;
+
+        // Update the document with the new value
+        await updateDoc(recitationDocRef, {
+          totalPoints: newTotalPoint,
+          week: WeekTotalPoint,
+          day: DayTotalPoint,
+        });
+        console.log("Minus button clicked for document ID:", documentID);
+      }
+    }
+
+    // Perform the desired action based on the button clicked
+    else if (action === "add") {
+      const recitationDocRefe = doc(recitationCollectionReflllty, documentID);
+
+      // Retrieve the document data
+      const docSnapshot = await getDoc(recitationDocRefe);
+      if (docSnapshot.exists()) {
+        const docData = docSnapshot.data();
+
+        // Decrease the value of the totalPoint field by 1
+        const newTotalPoint = docData.totalPoints + 1;
+        const WeekTotalPoint = docData.week + 1;
+        const DayTotalPoint = docData.day + 1;
+        // Update the document with the new value
+        await updateDoc(recitationDocRefe, {
+          totalPoints: newTotalPoint,
+          week: WeekTotalPoint,
+          day: DayTotalPoint,
+        });
+        console.log("Minus button clicked for document ID:", documentID);
+      }
+      console.log("Add button clicked for document ID:", documentID);
+      // Perform any other actions specific to the add button
+    }
+  }
+
+  let studentNames = [];
+  let isRolling = false;
+  let previousStudentIndex = -1; // Initialize with an invalid index
+  const calledNames = [];
+  let recitationType;
+
+  // Call the function to fetch and display notes
+  async function change() {
+    console.log(selecTSub);
+    classCheck();
+    recitationCheck();
+    sortRecitation();
+  }
+
+  async function getuserName(id) {
+    const queryRef1 = collection(firestore, "users");
+    const queryRef2 = query(queryRef1, where("UID", "==", id));
+    const querySnapshot = await getDocs(queryRef2);
+    if (querySnapshot.docs.length > 0) {
+      const doc = querySnapshot.docs[0];
+      console.log(doc.data().Name);
+      document.getElementById("userName").textContent =
+        doc.data().firstName + " " + doc.data().lastName;
+    } else {
+      return "Teacher not found";
+    }
+  }
+
+  async function sortRecitation() {
+    console.log("haha");
+    const selectOption = document.getElementById("SortRec").value;
+    const totalElements = document.getElementsByClassName("pointsDisplay1");
+    const weekElements = document.getElementsByClassName("pointsDisplay2");
+    const dayElements = document.getElementsByClassName("pointsDisplay3");
+
+    if (selectOption === "Total Points") {
+      for (let i = 0; i < totalElements.length; i++) {
+        totalElements[i].hidden = false;
+      }
+      for (let i = 0; i < weekElements.length; i++) {
+        weekElements[i].hidden = true;
+      }
+      for (let i = 0; i < dayElements.length; i++) {
+        dayElements[i].hidden = true;
+      }
+
+      recitation.sort((a, b) => b.totalPoints - a.totalPoints);
+
+      recitation.forEach((item, index) => {
+        item.ranking = index + 1;
+      });
+    }
+
+    if (selectOption === "Weekly") {
+      for (let i = 0; i < totalElements.length; i++) {
+        totalElements[i].hidden = true;
+      }
+      for (let i = 0; i < weekElements.length; i++) {
+        weekElements[i].hidden = true;
+      }
+      for (let i = 0; i < dayElements.length; i++) {
+        dayElements[i].hidden = false;
+      }
+
+      recitation.sort((a, b) => b.week - a.week);
+
+      recitation.forEach((item, index) => {
+        item.ranking = index + 1;
+      });
+    }
+
+    if (selectOption === "Daily") {
+      for (let i = 0; i < totalElements.length; i++) {
+        totalElements[i].hidden = true;
+      }
+      for (let i = 0; i < weekElements.length; i++) {
+        weekElements[i].hidden = false;
+      }
+      for (let i = 0; i < dayElements.length; i++) {
+        dayElements[i].hidden = true;
+      }
+
+      recitation.sort((a, b) => b.day - a.day);
+
+      recitation.forEach((item, index) => {
+        item.ranking = index + 1;
+      });
+    }
+    recitationCheck();
+  }
+
+  onMount(() => {
+    const unsubscribe = userId.subscribe((value) => {
+      // Use the value of userId here
+      userUID = localStorage.getItem("userId");
+      console.log(userUID);
+      getuserName(userUID);
+      classCheck();
+      return () => {
+        unsubscribe();
+      };
+    });
+
+    subjectSelected1.subscribe((val) => {
+      if (typeof localStorage !== "undefined") {
+        localStorage.subjectSelected1 = val;
+      }
+    });
+
+    timeFrom.subscribe((val) => {
+      if (typeof localStorage !== "undefined") {
+        localStorage.timeFrom = val;
+      }
+    });
+
+    timeTo.subscribe((val) => {
+      if (typeof localStorage !== "undefined") {
+        localStorage.timeTo = val;
+      }
+    });
+
+    // newPage();
+  });
+  getDate();
+</script>
+
 <body class=" bg-gray-50 h-screen">
   <header class="text-gray-600 body-font">
     <!-- svelte-ignore a11y-missing-attribute -->
@@ -47,15 +405,25 @@
 
   <div class="flex justify-center mt-4 mx-6">
     <select
+      id="classSelection"
       class="select select-bordered font-medium focus:outline-1 w-full rounded-3xl max-w-xs"
+      bind:value={selecTSub}
+      on:change={(event) => {
+        change();
+      }}
     >
       <option disabled selected>Select Class</option>
-      <option>Diamond - Math</option>
-      <option>Ruby - Science</option>
+
+      {#each docsArray as item1}
+        <option class="rounded-xl" value={item1.id}>
+          {item1.id}
+        </option>
+      {/each}
     </select>
 
     <select
       id="SortRec"
+      on:change={sortRecitation}
       class="w-56 h-12 font-medium text-sm rounded-3xl text-center mx-2 px-2 border border-gray-300 focus:outline-1 focus:outline-gray-300"
     >
       <option selected class="rounded-3xl">Total Points</option>
@@ -64,7 +432,9 @@
     </select>
   </div>
   <div class="mt-6 flex w-full justify-start pl-6">
-    <button class="bg-red-500 rounded-3xl text-sm text-white w-24 h-6">Reset Points</button>
+    <button class="bg-red-500 rounded-3xl text-sm text-white w-24 h-6" on:click={resetRecitationPoints}
+      >Reset Points</button
+    >
   </div>
   <div class="mt-2 px-4 items-center text-center h-3/4 overflow-y-auto">
     <table
@@ -82,25 +452,37 @@
       </thead>
 
       <tbody>
-        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-          <td class="py-4 text-center">1</td>
-          <td class="text-center">Luis Santiago</td>
-          <td class="text-center">6</td>
-          <td class="text-center">
-            <!-- svelte-ignore a11y-click-events-have-key-events -->
-            <img
-              src="minus.png"
-              class="btn btn-xs px-1 bg-transparent hover:bg-transparent border-none"
-              alt="..."
-            />
-            <!-- svelte-ignore a11y-click-events-have-key-events -->
-            <img
-              src="add.png"
-              class="btn btn-xs px-1 bg-transparent hover:bg-transparent border-none"
-              alt="..."
-            />
-          </td>
-        </tr>
+        {#each recitation as data}
+          <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+            <td class="py-4 text-center">{data.ranking}</td>
+            <td class="text-center">{data.name}</td>
+            <td id="pointsDisplay1" class="pointsDisplay1 text-center"
+              >{data.totalPoints}</td
+            >
+            <td id="pointsDisplay2" class="pointsDisplay2 text-center" hidden
+              >{data.day}</td
+            >
+            <td id="pointsDisplay3" class="pointsDisplay3 text-center" hidden
+              >{data.week}</td
+            >
+            <td class="text-center">
+              <!-- svelte-ignore a11y-click-events-have-key-events -->
+              <img
+                on:click={() => changeDocumentID("minus", data.id)}
+                src="minus.png"
+                class="btn btn-xs px-1 bg-transparent hover:bg-transparent border-none"
+                alt="..."
+              />
+              <!-- svelte-ignore a11y-click-events-have-key-events -->
+              <img
+                on:click={() => changeDocumentID("add", data.id)}
+                src="add.png"
+                class="btn btn-xs px-1 bg-transparent hover:bg-transparent border-none"
+                alt="..."
+              />
+            </td>
+          </tr>
+        {/each}
       </tbody>
     </table>
   </div>
@@ -201,6 +583,8 @@
       </button>
     </div>
   </div>
+
+  <Toaster />
 </body>
 
 <style>
