@@ -22,52 +22,67 @@
   let email = "";
   let password = "";
   let userUID = "";
-
   async function login() {
-    if (email === "" || password === "") {
-      console.log("Email or password is empty");
-      toast.error("Email or Password is empty");
-      return; // Exit the function
-    }
-
-    toast.success("Logging In");
-    const q = query(
-      collection(firestore, "users"),
-      where("email", "==", email)
-    );
-    const querySnapshot = await getDocs(q);
-
-    querySnapshot.forEach((doc) => {
-      if (doc.exists()) {
-        console.log(doc.data());
-        const userData = doc.data();
-        console.log("Document data:", userData);
-
-        if (userData.userRole === "teacher") {
-          if (userData.password === password) {
-            console.log("User is a Teacher");
-            toast.success("Log In Successful");
-            const userUID = userData.UID;
-            userId.set(userUID);
-            const userUID1 = localStorage.getItem("userId");
-            goto("../Attendance");
-          } else {
-            console.log("Wrong Password");
-            toast.error("Wrong Password");
-            // Handle case when user is not a teacher
-          }
-        } else {
-          console.log("User is not a Student");
-          toast.error("User is not a Student");
-          // Handle case when user is not a teacher
-        }
-      } else {
-        console.log("User not found");
-        toast.log("User not found");
+    return new Promise(async (resolve, reject) => {
+      if (email === "" || password === "") {
+        console.log("Email or password is empty");
+        reject("Email or Password is empty");
+        return; // Exit the function
       }
+
+      toast.promise(
+        (async () => {
+          const q = query(
+            collection(firestore, "users"),
+            where("email", "==", email)
+          );
+          const querySnapshot = await getDocs(q);
+
+          let foundUser = false;
+
+          try {
+            for (const doc of querySnapshot.docs) {
+              foundUser = true;
+              const userData = doc.data();
+              console.log("Document data:", userData);
+
+              if (userData.userRole === "teacher") {
+                if (userData.password === password) {
+                  console.log("User is a Teacher");
+                  const userUID = userData.UID;
+                  userId.set(userUID);
+                  const userUID1 = localStorage.getItem("userId");
+                  goto("../Attendance");
+                  resolve("Log In Successful");
+                  return; // Exit the loop if login is successful
+                } else {
+                  console.log("Wrong Password");
+                  throw new Error("Wrong Password");
+                }
+              } else {
+                console.log("User is not a Teacher");
+                throw new Error("User is not a Teacher");
+              }
+            }
+
+            // If the loop completes and no user is found
+            if (!foundUser) {
+              console.log("User not found");
+              throw new Error("Login failed");
+            }
+          } catch (error) {
+            console.error("Error during login:", error);
+            throw new Error("Login failed");
+          }
+        })(),
+        {
+          loading: "Logging In...",
+          success: "Log In Successful",
+          error: (error) => error.message, // Display the error message in the toaster
+        }
+      );
     });
   }
-
   onMount(() => {
     userId.subscribe((val) => {
       if (browser) localStorage.userId = val;
