@@ -346,7 +346,7 @@
               class="text-center rounded-2xl mt-2 dropdown-content shadow bg-base-100 w-24"
             >
               <li class="rounded-2xl hover:bg-gray-200">
-                <a class=" py-1 flex justify-center font-medium text-sm"
+                <a class=" py-1 flex justify-center font-medium text-md"
                   >Log out</a
                 >
               </li>
@@ -380,7 +380,7 @@
         fetchAndDisplayNotes(event.target.value);
       }}
       id="SortRec"
-      class="w-56 h-12 font-medium text-sm rounded-3xl text-center mx-2 px-2 border border-gray-300 focus:outline-1 focus:outline-gray-300"
+      class="bg-white w-56 h-12 font-medium text-sm rounded-3xl text-center mx-2 px-2 border border-gray-300 focus:outline-1 focus:outline-gray-300"
     >
       <option disabled selected class="rounded-3xl">Sort By</option>
       <option class="rounded-xl">Recent</option>

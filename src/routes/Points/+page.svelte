@@ -404,7 +404,7 @@
               class="text-center rounded-2xl mt-2 dropdown-content shadow bg-base-100 w-24"
             >
               <li class="rounded-2xl hover:bg-gray-200">
-                <a class=" py-1 flex justify-center font-medium text-sm"
+                <a class=" py-1 flex justify-center font-medium text-md"
                   >Log out</a
                 >
               </li>
@@ -436,7 +436,7 @@
     <select
       id="SortRec"
       on:change={sortRecitation}
-      class="w-56 h-12 font-medium text-sm rounded-3xl text-center mx-2 px-2 border border-gray-300 focus:outline-1 focus:outline-gray-300"
+      class="bg-white w-56 h-12 font-medium text-sm rounded-3xl text-center mx-2 px-2 border border-gray-300 focus:outline-1 focus:outline-gray-300"
     >
       <option selected class="rounded-3xl">Total Points</option>
       <option class="rounded-xl">Daily</option>
@@ -455,7 +455,7 @@
             for="reset"
             class="btn btn-sm btn-circle absolute right-2 top-2">✕</label
           >
-        <h3 class="text-lg font-bold text-center mt-4">Are you sure to Reset All Points?</h3>
+        <h3 class="text-lg font-bold text-center mt-4">Are you sure to reset all points?</h3>
         <div class="mt-6 mb-1 flex justify-center">
          <button id="yesButton" on:click={resetRecitationPoints} class="bg-red-500 rounded-3xl mx-2 w-20 text-white px-4 font-medium">Yes</button>
          <label for="reset" class="bg-gray-200 rounded-3xl w-20 text-black font-medium text-center px-4 mx-2">No</label>

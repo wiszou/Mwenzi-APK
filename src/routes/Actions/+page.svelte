@@ -785,7 +785,7 @@
               class="text-center rounded-2xl mt-2 dropdown-content shadow bg-base-100 w-24"
             >
               <li class="rounded-2xl hover:bg-gray-200">
-                <a class=" py-1 flex justify-center font-medium text-sm"
+                <a class=" py-1 flex justify-center font-medium text-md"
                   >Log out</a
                 >
               </li>
@@ -815,7 +815,7 @@
     </select>
   </div>
 
-  <div class="flex justify-center mt-5 flex-col items-center w-full gap-2">
+  <div class="flex justify-center mt-4 flex-col items-center w-full gap-2">
     <!--RANDOMIZER-->
     <div
       class="w-80 bg-red-600 bg-opacity-75 rounded-3xl text-center shadow-lg"
@@ -827,7 +827,7 @@
       <!--RAN MODAL-->
       <label
         for="randomizer"
-        class="my-5 btn h-20 w-56 bg-white text-red-600 border-transparent hover:bg-red-100 hover:border-none text-base rounded-3xl"
+        class="my-4 btn h-20 w-56 bg-white text-red-600 border-transparent hover:bg-red-100 hover:border-none text-base rounded-3xl"
         >Pick</label
       >
       <input type="checkbox" id="randomizer" class="modal-toggle" />
@@ -883,7 +883,7 @@
       <!--GRP CREATOR MODAL-->
       <label
         for="GroupCreator"
-        class="my-5 btn h-20 w-56 bg-white text-green-500 border-transparent hover:bg-green-100 hover:border-none text-base rounded-3xl"
+        class="my-4 btn h-20 w-56 bg-white text-green-500 border-transparent hover:bg-green-100 hover:border-none text-base rounded-3xl"
         >Create</label
       >
       <input type="checkbox" id="GroupCreator" class="modal-toggle" />
@@ -952,7 +952,7 @@
       <!--JAM MODAL-->
       <label
         for="Jamboard"
-        class="my-5 btn h-20 w-56 bg-white text-purple-500 hover:bg-purple-100 border-transparent hover:border-none text-base rounded-3xl"
+        class="my-4 btn h-20 w-56 bg-white text-purple-500 hover:bg-purple-100 border-transparent hover:border-none text-base rounded-3xl"
         >Draw</label
       >
       <input type="checkbox" id="Jamboard" class="modal-toggle" />
@@ -986,7 +986,7 @@
 
       <label
         for="lessonplan"
-        class="my-5 btn h-20 w-56 bg-white text-blue-500 border-transparent hover:bg-blue-100 hover:border-none text-base rounded-3xl"
+        class="my-4 btn h-20 w-56 bg-white text-blue-500 border-transparent hover:bg-blue-100 hover:border-none text-base rounded-3xl"
         >Open</label
       >
       <input type="checkbox" id="lessonplan" class="modal-toggle" />
