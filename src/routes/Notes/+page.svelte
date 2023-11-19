@@ -1,4 +1,3 @@
-
 <script>
   import { auth, database } from "$lib/firebase";
   import {
@@ -391,19 +390,6 @@
   getDate();
 </script>
 
-
-
-<style>
-  header {
-	view-transition-name: header;
-}
-
-  #bottomnav {
-    view-transition-name: bottomnav;
-}
-
-</style>
-
 <body class="0 h-screen">
   <header class="text-gray-600 body-font">
     <!-- svelte-ignore a11y-missing-attribute -->
@@ -482,122 +468,140 @@
 
   <div class="mt-5 px-4 items-center text-center h-3/4 overflow-y-auto">
     <div class="flex flex-row ml-3 justify-center mb-2">
-    <div class="flex flex-row items-center mt-2 justify-center">
-      <input
-        bind:value={title}
-        class="pl-4 border border-r-0 rounded-l-3xl focus:ring-0 text-sm block bg-white w-60 h-7 border-slate-300 shadow-sm focus:outline-none"
-        placeholder="Add Notes"
-        type="text"
-        name="search12"
-      />
-      <button
-        on:click={addNote}
-        id="addButton"
-        class="add-button w-12 h-7 border border-slate-300 rounded-r-3xl bg-blue-500 hover:bg-blue-700 border-none transform transition-transform focus:scale-100 active:scale-95"
+      <div class="flex flex-row items-center mt-2 justify-center">
+        <input
+          bind:value={title}
+          class="pl-4 border border-r-0 rounded-l-3xl focus:ring-0 text-sm block bg-white w-60 h-7 border-slate-300 shadow-sm focus:outline-none"
+          placeholder="Add Notes"
+          type="text"
+          name="search12"
+        />
+        <button
+          on:click={addNote}
+          id="addButton"
+          class="add-button w-12 h-7 border border-slate-300 rounded-r-3xl bg-blue-500 hover:bg-blue-700 border-none transform transition-transform focus:scale-100 active:scale-95"
+        >
+          <svg
+            width="20px"
+            height="20px"
+            viewBox="0 0 20 20"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            class="ml-3"
+            ><g id="SVGRepo_bgCarrier" stroke-width="0" /><g
+              id="SVGRepo_tracerCarrier"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            /><g id="SVGRepo_iconCarrier">
+              <path
+                fill="#f2f2f2"
+                fill-rule="evenodd"
+                d="M9 17a1 1 0 102 0v-6h6a1 1 0 100-2h-6V3a1 1 0 10-2 0v6H3a1 1 0 000 2h6v6z"
+              />
+            </g></svg
+          >
+        </button>
+      </div>
+
+      <!--NOTE ARCHIVES -->
+      <label
+        for="NotesArchives"
+        class="mr-8 mt-2 ml-3 rounded-3xl cursor-pointer"
       >
         <svg
-          width="20px"
-          height="20px"
-          viewBox="0 0 20 20"
-          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
           fill="none"
-          class="ml-3"
+          xmlns="http://www.w3.org/2000/svg"
+          width="26"
           ><g id="SVGRepo_bgCarrier" stroke-width="0" /><g
             id="SVGRepo_tracerCarrier"
             stroke-linecap="round"
             stroke-linejoin="round"
-          /><g id="SVGRepo_iconCarrier">
-            <path
-              fill="#f2f2f2"
-              fill-rule="evenodd"
-              d="M9 17a1 1 0 102 0v-6h6a1 1 0 100-2h-6V3a1 1 0 10-2 0v6H3a1 1 0 000 2h6v6z"
-            />
-          </g></svg
+          /><g id="SVGRepo_iconCarrier" ble-fi
+            ><path
+              d="M8.707 6.707a1 1 0 0 0-1.414-1.414L4 8.586 2.707 7.293a1 1 0 0 0-1.414 1.414l2 2a1 1 0 0 0 1.414 0l4-4ZM12 7a1 1 0 1 0 0 2h10a1 1 0 1 0 0-2H12ZM8.707 13.293a1 1 0 0 1 0 1.414l-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 1 1 1.414-1.414L4 16.586l3.293-3.293a1 1 0 0 1 1.414 0ZM12 15a1 1 0 1 0 0 2h10a1 1 0 1 0 0-2H12Z"
+              fill="#currentColor"
+              class="fill-current text-gray-600 hover:text-blue-500"
+            /></g
+          ></svg
         >
-      </button>
-    </div>
+      </label>
 
-    <!--NOTE ARCHIVES -->
-    <label for="NotesArchives" class="mr-8 mt-2 ml-3 rounded-3xl cursor-pointer">
-      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="26"
-        ><g id="SVGRepo_bgCarrier" stroke-width="0" /><g
-          id="SVGRepo_tracerCarrier"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        /><g id="SVGRepo_iconCarrier" ble-fi
-          ><path
-            d="M8.707 6.707a1 1 0 0 0-1.414-1.414L4 8.586 2.707 7.293a1 1 0 0 0-1.414 1.414l2 2a1 1 0 0 0 1.414 0l4-4ZM12 7a1 1 0 1 0 0 2h10a1 1 0 1 0 0-2H12ZM8.707 13.293a1 1 0 0 1 0 1.414l-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 1 1 1.414-1.414L4 16.586l3.293-3.293a1 1 0 0 1 1.414 0ZM12 15a1 1 0 1 0 0 2h10a1 1 0 1 0 0-2H12Z"
-            fill="#currentColor"
-            class="fill-current text-gray-600 hover:text-blue-500"
-          /></g
-        ></svg
-      >
-    </label>
+      <input type="checkbox" id="NotesArchives" class="modal-toggle" />
+      <div class="modal">
+        <div class="modal-box relative h-4/6 max-w-3xl text-left">
+          <label
+            for="NotesArchives"
+            class="btn btn-sm btn-circle absolute right-2 top-2">✕</label
+          >
+          <h3 class="text-xl font-bold text-center">Note Archives</h3>
 
-    <input type="checkbox" id="NotesArchives" class="modal-toggle" />
-    <div class="modal">
-      <div class="modal-box relative h-4/6 max-w-3xl text-left">
-        <label for="NotesArchives" class="btn btn-sm btn-circle absolute right-2 top-2"
-          >✕</label
-        >
-        <h3 class="text-xl font-bold text-center">Note Archives</h3>
-
-        <div
-          class="relative overflow-y-auto shadow-sm rounded-xl mx-1 mt-8 h-4/5 max-h-4/5"
-        >
-        <table
-      class="text-sm text-gray-500 dark:text-gray-400 w-full rounded-lg shadow-sm"
-    >
-      <thead
-        class="text-xs text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-400 sticky top-0"
-      >
-        <tr>
-          <th scope="col" class="pr-5 pl-3 py-4 text-left">Note</th>
-          <th scope="col" class="px-6 py-4 text-center">Status</th>
-          <th scope="col" class="px-6 py-4 text-right">Action</th>
-        </tr>
-      </thead>
-
-      <tbody>
-        {#each noteArray as item1}
-          <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-            <td class="px-2 pb-1 pt-1 w-36">
-              <h1 class="font-medium text-left text-sm">
-                <span class="text-xs font-normal">{item1.Date}</span><br />
-                {item1.Title}
-              </h1>
-            </td>
-            <td class="text-center">
-              <select
-                on:change={(event) => {
-                  noteStatus(item1.id);
-                }}
-                id="selectOption"
-                class="update-status-select border-gray-200 w-28 h-6 mr-1 font-medium text-sm text-center border border-gray focus:none rounded-3xl shadow-sm"
+          <div
+            class="relative overflow-y-auto shadow-sm rounded-xl mx-1 mt-8 h-4/5 max-h-4/5"
+          >
+            <table
+              class="text-sm text-gray-500 dark:text-gray-400 w-full rounded-lg shadow-sm"
+            >
+              <thead
+                class="text-xs text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-400 sticky top-0"
               >
-                {#if item1.Status == "Only Me"}
-                  <option selected value="Only Me">Only Me</option>
-                  <option value="Current Class">Share to Class</option>
-                {/if}
-                {#if item1.Status == "Current Class"}
-                  <option value="Only Me">Only Me</option>
-                  <option selected value="Current Class">Current Class</option>
-                {/if}
-              </select>
-            </td>
-            <td class="text-center">
-              <button class="px-3 bg-yellow-500 border-transparent hover:bg-yellow-600 hover:border-none text-sm text-white rounded-3xl">
-                Undo
-              </button>
-            </td>
-          </tr>
-        {/each}
-      </tbody>
-    </table>
+                <tr>
+                  <th scope="col" class="pr-5 pl-3 py-4 text-left">Note</th>
+                  <th scope="col" class="px-6 py-4 text-center">Status</th>
+                  <th scope="col" class="px-6 py-4 text-right">Action</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                {#each noteArchive as item1}
+                  <tr
+                    class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+                  >
+                    <td class="px-2 pb-1 pt-1 w-36">
+                      <h1 class="font-medium text-left text-sm">
+                        <span class="text-xs font-normal">{item1.Date}</span><br
+                        />
+                        {item1.Title}
+                      </h1>
+                    </td>
+                    <td class="text-center">
+                      <select
+                        on:change={(event) => {
+                          noteStatus(item1.id);
+                        }}
+                        id="selectOption"
+                        class="update-status-select border-gray-200 w-28 h-6 mr-1 font-medium text-sm text-center border border-gray focus:none rounded-3xl shadow-sm"
+                      >
+                        {#if item1.Status == "Only Me"}
+                          <option selected value="Only Me">Only Me</option>
+                          <option value="Current Class">Share to Class</option>
+                        {/if}
+                        {#if item1.Status == "Current Class"}
+                          <option value="Only Me">Only Me</option>
+                          <option selected value="Current Class"
+                            >Current Class</option
+                          >
+                        {/if}
+                      </select>
+                    </td>
+                    <td class="text-center">
+                      <button
+                        class="px-3 bg-yellow-500 border-transparent hover:bg-yellow-600 hover:border-none text-sm text-white rounded-3xl"
+                        on:click={(event) => {
+                          noteUndo(item1.id);
+                        }}
+                      >
+                        Undo
+                      </button>
+                    </td>
+                  </tr>
+                {/each}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
     <table
       class="text-sm text-gray-500 dark:text-gray-400 w-full rounded-lg shadow-sm"
@@ -673,7 +677,8 @@
 
   <!-- BOTTOM -->
   <div
-    id="bottomnav" class="fixed bottom-0 left-0 z-50 w-full h-16 bg-white border-t border-gray-200 dark:bg-gray-700 dark:border-gray-600"
+    id="bottomnav"
+    class="fixed bottom-0 left-0 z-50 w-full h-16 bg-white border-t border-gray-200 dark:bg-gray-700 dark:border-gray-600"
   >
     <div class="grid h-full max-w-lg grid-cols-4 mx-auto font-medium">
       <button
@@ -788,3 +793,13 @@
     }
   </style>
    -->
+
+<style>
+  header {
+    view-transition-name: header;
+  }
+
+  #bottomnav {
+    view-transition-name: bottomnav;
+  }
+</style>
