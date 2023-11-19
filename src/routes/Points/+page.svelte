@@ -1,3 +1,5 @@
+POINTS
+
 <script>
   import { auth, database } from "$lib/firebase";
   import {
@@ -53,6 +55,12 @@
   }
 
   async function resetRecitationPoints() {
+
+    if (selecTSub === "Select Class") {
+      toast.error("Please select a class");
+      return;
+    }
+  try {
     const attendanceCollectionRef = collection(
       firestore,
       "Subject",
@@ -62,17 +70,31 @@
 
     const querySnapshot = await getDocs(attendanceCollectionRef);
 
+    // Loop through the documents and update each one
     querySnapshot.forEach(async (doc) => {
-      const docRef = doc.ref;
-      await updateDoc(docRef, {
-        totalPoints: 0, // Set to the desired value for totalPoints
-        day: null, // Set to the desired value for day
-        week: null, // Set to the desired value for week
-      });
-    });
+      try {
+        const docRef = doc.ref;
 
-    toast.success("Points reset successfully.");
+        // Update the document fields
+        await updateDoc(docRef, {
+          totalPoints: 0, // Set to the desired value for totalPoints
+          day: null, // Set to the desired value for day
+          week: null, // Set to the desired value for week
+        });
+
+        toast.success("Points reset successfully.");
+      } catch (updateError) {
+        // Handle the error that occurred during the update
+        console.error("Error updating document:", updateError);
+        toast.error("Error resetting points. Please try again.");
+      }
+    });
+  } catch (fetchError) {
+    // Handle the error that occurred while fetching documents
+    console.error("Error fetching documents:", fetchError);
+    toast.error("Error fetching recitation documents. Please try again.");
   }
+}
 
   async function recitationCheck() {
     const selectOption = document.getElementById("SortRec").value;
@@ -205,6 +227,7 @@
           day: DayTotalPoint,
         });
         console.log("Minus button clicked for document ID:", documentID);
+
       }
     }
 
@@ -232,6 +255,7 @@
       console.log("Add button clicked for document ID:", documentID);
       // Perform any other actions specific to the add button
     }
+    toast.success("Updated student points");
   }
 
   let studentNames = [];

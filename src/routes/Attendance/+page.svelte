@@ -1,3 +1,4 @@
+
 <script>
   import { auth, database } from "$lib/firebase";
   import {
@@ -193,8 +194,8 @@
         // console.log(presentCount, absentCount);
         // document.getElementById("present1").textContent = presentCount;
         // document.getElementById("absent1").textContent = absentCount;
-        // fetchTime();
-        // fetchNames();
+        fetchTime();
+        fetchNames();
       });
 
       attendance = attendance;
@@ -357,9 +358,11 @@
         if (fieldName) {
           attendanceData[fieldName].late = "True";
           await setDoc(attendanceDocRef, attendanceData);
+        
         }
       }
     }
+    toast.success("Status succesfully changed")
   }
 
   async function changeStatus2(action, documentID) {

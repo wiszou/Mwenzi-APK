@@ -1,3 +1,4 @@
+
 <script>
   import { auth, database } from "$lib/firebase";
   import {
@@ -85,6 +86,10 @@
   const calledNames = [];
   let recitationType;
   async function getRandomName() {
+    if (selecTSub === "Select Class") {
+      toast.error("Please select a class");
+      return;
+    }
     if (isRolling) return; // Prevent multiple clicks while rolling
     const collectionRef = collection(
       firestore,
@@ -147,7 +152,10 @@
   }
 
   function resetRecitation() {
-    // Reset the list of called names
+    if (selecTSub === "Select Class") {
+      toast.error("Please select a class");
+      return;
+    }
     calledNames.length = 0;
 
     // You can also update the UI to indicate that the list has been reset
@@ -157,6 +165,10 @@
   var isEditing = false;
 
   function toggleEditButton() {
+    if (selecTSub === "Select Class") {
+      toast.error("Please select a class");
+      return;
+    }
     isEditing = !isEditing; // Toggle the editing state
     var saveButton = document.getElementById("saveButton1"); // You need to define 'saveButton' if it's used elsewhere.
 
@@ -231,7 +243,14 @@
   }
   let groupType;
   async function groupStudents() {
-    console.log(groupType);
+    if (selecTSub === "Select Class") {
+      toast.error("Please select a class");
+      return;
+    }
+    if (groupType === "Select") {
+      toast.error("Please select students");
+      return;
+    }
 
     // Create a reference to the specific document within the 'Subject' collection
 
@@ -275,7 +294,9 @@
 
               displayGroupedStudents(groupedStudents);
             } else {
+              toast.error("Please select a valid group size.");
               console.log("Please select a valid group size.");
+
             }
           }
         }
@@ -315,10 +336,12 @@
               // Display the grouped students in the HTML table
               displayGroupedStudents(groupedStudents);
             } else {
+              toast.error("Please select a valid group size.");
               console.log("Please select a valid group size.");
             }
           } else {
             console.log("No 'students' field found in the document.");
+            toast.log("No 'students' field found in the document.");
           }
         } else {
           console.log("Document does not exist.");
@@ -439,6 +462,10 @@
   let weekStatus = "";
 
   async function createWeeklyLesson() {
+    if (selecTSub === "Select Class") {
+      toast.error("Please select a class");
+      return;
+    }
     console.log("test");
     const collectionRef = collection(
       firestore,
@@ -484,6 +511,11 @@
   }
 
   async function resetWeeklyLesson() {
+    
+    if (selecTSub === "Select Class") {
+      toast.error("Please select a class");
+      return;
+    }
     console.log("test");
     const collectionRef = collection(
       firestore,
@@ -529,6 +561,10 @@
   }
 
   async function updateLessonText() {
+    if (selecTSub === "Select Class") {
+      toast.error("Please select a class");
+      return;
+    }
     const weekSelector = document.getElementById("weekSelector");
     const selectedValue = weekSelector.value;
     const collectionRef = collection(
@@ -785,7 +821,7 @@
               class="text-center rounded-2xl mt-2 dropdown-content shadow bg-base-100 w-24"
             >
               <li class="rounded-2xl hover:bg-gray-200">
-                <a class=" py-1 flex justify-center font-medium text-md"
+                <a class=" py-1 flex justify-center font-medium text-sm"
                   >Log out</a
                 >
               </li>
@@ -815,7 +851,7 @@
     </select>
   </div>
 
-  <div class="flex justify-center mt-4 flex-col items-center w-full gap-2">
+  <div class="flex justify-center mt-5 flex-col items-center w-full gap-2">
     <!--RANDOMIZER-->
     <div
       class="w-80 bg-red-600 bg-opacity-75 rounded-3xl text-center shadow-lg"
@@ -827,7 +863,7 @@
       <!--RAN MODAL-->
       <label
         for="randomizer"
-        class="my-4 btn h-20 w-56 bg-white text-red-600 border-transparent hover:bg-red-100 hover:border-none text-base rounded-3xl"
+        class="my-5 btn h-20 w-56 bg-white text-red-600 border-transparent hover:bg-red-100 hover:border-none text-base rounded-3xl"
         >Pick</label
       >
       <input type="checkbox" id="randomizer" class="modal-toggle" />
@@ -883,7 +919,7 @@
       <!--GRP CREATOR MODAL-->
       <label
         for="GroupCreator"
-        class="my-4 btn h-20 w-56 bg-white text-green-500 border-transparent hover:bg-green-100 hover:border-none text-base rounded-3xl"
+        class="my-5 btn h-20 w-56 bg-white text-green-500 border-transparent hover:bg-green-100 hover:border-none text-base rounded-3xl"
         >Create</label
       >
       <input type="checkbox" id="GroupCreator" class="modal-toggle" />
@@ -952,7 +988,7 @@
       <!--JAM MODAL-->
       <label
         for="Jamboard"
-        class="my-4 btn h-20 w-56 bg-white text-purple-500 hover:bg-purple-100 border-transparent hover:border-none text-base rounded-3xl"
+        class="my-5 btn h-20 w-56 bg-white text-purple-500 hover:bg-purple-100 border-transparent hover:border-none text-base rounded-3xl"
         >Draw</label
       >
       <input type="checkbox" id="Jamboard" class="modal-toggle" />
@@ -986,7 +1022,7 @@
 
       <label
         for="lessonplan"
-        class="my-4 btn h-20 w-56 bg-white text-blue-500 border-transparent hover:bg-blue-100 hover:border-none text-base rounded-3xl"
+        class="my-5 btn h-20 w-56 bg-white text-blue-500 border-transparent hover:bg-blue-100 hover:border-none text-base rounded-3xl"
         >Open</label
       >
       <input type="checkbox" id="lessonplan" class="modal-toggle" />

@@ -1,3 +1,4 @@
+
 <script>
   import { auth, database } from "$lib/firebase";
   import {
@@ -42,6 +43,10 @@
   let dateSelected;
 
   async function noteStatus(id) {
+    if (selecTSub === "Select Class") {
+      toast.error("Please select a class");
+      return;
+    }
     const optionValue = document.getElementById("selectOption").value;
     const collectionRef = collection(firestore, "Subject", selecTSub, "Notes");
     const docRef = doc(collectionRef, id);
@@ -60,6 +65,7 @@
         // Optionally, retrieve and return the updated data
         const updatedDocSnapshot = await getDoc(doc);
         const updatedData = updatedDocSnapshot.data();
+        toast.success("Updated the status of a note");
         return updatedData;
       } else {
         // Document does not exist
@@ -73,6 +79,10 @@
   }
 
   async function noteCompletion(id) {
+    if (selecTSub === "Select Class") {
+      toast.error("Please select a class");
+      return;
+    }
     const collectionRef = collection(firestore, "Subject", selecTSub, "Notes");
     const docRef = doc(collectionRef, id);
     console.log(id);
@@ -89,6 +99,41 @@
         // Optionally, retrieve and return the updated data
         const updatedDocSnapshot = await getDoc(doc);
         const updatedData = updatedDocSnapshot.data();
+        toast.success("Archived a note");
+        return updatedData;
+      } else {
+        // Document does not exist
+        console.log("No such document!");
+        return null;
+      }
+    } catch (error) {
+      console.error("Error updating document:", error);
+      throw error;
+    }
+  }
+
+  async function noteUndo(id) {
+    if (selecTSub === "Select Class") {
+      toast.error("Please select a class");
+      return;
+    }
+    const collectionRef = collection(firestore, "Subject", selecTSub, "Notes");
+    const docRef = doc(collectionRef, id);
+    console.log(id);
+
+    try {
+      const docSnapshot = await getDoc(docRef);
+
+      if (docSnapshot.exists()) {
+        // The document with the specified ID exists
+        const doc = docSnapshot.ref;
+
+        await updateDoc(doc, { Archive: "false" });
+
+        // Optionally, retrieve and return the updated data
+        const updatedDocSnapshot = await getDoc(doc);
+        const updatedData = updatedDocSnapshot.data();
+        toast.success("Unarchived a note");
         return updatedData;
       } else {
         // Document does not exist
@@ -102,6 +147,10 @@
   }
 
   async function noteDelete(id) {
+    if (selecTSub === "Select Class") {
+      toast.error("Please select a class");
+      return;
+    }
     const collectionRef = collection(firestore, "Subject", selecTSub, "Notes");
     const docRef = doc(collectionRef, id);
 
@@ -183,6 +232,10 @@
   let title = ""; // Declare a variable to hold the input value
 
   function addNote() {
+    if (selecTSub === "Select Class") {
+      toast.error("Please select a class");
+      return;
+    }
     if (title.trim() !== "") {
       const collectionRef = collection(
         firestore,
@@ -199,6 +252,7 @@
       })
         .then((docRef) => {
           console.log("Document written with ID: ", docRef.id);
+          toast.success("Note succesfully added");
         })
         .catch((error) => {
           console.error("Error writing document: ", error);
@@ -245,11 +299,47 @@
     });
   }
 
+  let noteArchive = [];
+
+  function fetchAndDisplayNotes2(type) {
+    const collectionRef = collection(firestore, "Subject", selecTSub, "Notes");
+    const queryRef2 = query(collectionRef, where("Archive", "==", "true"));
+
+    const unsubscribe = onSnapshot(queryRef2, (snapshot) => {
+      // Clear the existing array when there's an update
+      noteArchive = [];
+      // Iterate over each document in the snapshot
+      snapshot.forEach((doc) => {
+        // Get the data of each document
+        const noteData = doc.data();
+        noteData.id = doc.id;
+        // Push the data into the array
+        noteArchive.push(noteData);
+      });
+
+      if (type === "Recent") {
+        noteArchive = noteArchive.sort((a, b) => {
+          console.log("Sorting Recent:", new Date(b.Date), new Date(a.Date));
+          return new Date(b.Date) - new Date(a.Date);
+        });
+      }
+      if (type === "Old") {
+        noteArchive = noteArchive.sort((a, b) => {
+          console.log("Sorting Old:", new Date(a.Date), new Date(b.Date));
+          return new Date(a.Date) - new Date(b.Date);
+        });
+      }
+      // Now, noteArray contains the updated data of all documents in the query
+      console.log(noteArchive);
+    });
+  }
+
   // Call the function to fetch and display notes
   async function change() {
     console.log(selecTSub);
     classCheck();
     fetchAndDisplayNotes(0);
+    fetchAndDisplayNotes2(0);
   }
 
   async function getuserName(id) {
@@ -300,6 +390,8 @@
   });
   getDate();
 </script>
+
+
 
 <style>
   header {
