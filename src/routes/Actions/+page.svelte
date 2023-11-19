@@ -169,6 +169,10 @@
       toast.error("Please select a class");
       return;
     }
+    if (weekStatus === "") {
+      toast.error("Please select a week");
+      return;
+    }
     isEditing = !isEditing; // Toggle the editing state
     var saveButton = document.getElementById("saveButton1"); // You need to define 'saveButton' if it's used elsewhere.
 
@@ -504,6 +508,7 @@
 
     try {
       await setDoc(week1DocRef, data1);
+      toast.success("Lesson Material Updated");
       console.log("Document written with ID: week1");
     } catch (error) {
       console.error("Error writing document: ", error);
@@ -511,9 +516,12 @@
   }
 
   async function resetWeeklyLesson() {
-    
     if (selecTSub === "Select Class") {
       toast.error("Please select a class");
+      return;
+    }
+    if (weekStatus === "") {
+      toast.error("Please select a week");
       return;
     }
     console.log("test");
@@ -1099,6 +1107,7 @@
                   id="day1checkbox"
                   type="checkbox"
                   class="checkbox h-8 w-8 ml-2"
+                  disabled="disabled"
                 />
               </div>
 
@@ -1234,6 +1243,7 @@
 
             <div class="justify-between flex mt-9 mb-2 mx-4">
               <button
+              on:click={resetWeeklyLesson}
                 id=""
                 class="text-sm font-medium bg-red-500 hover:bg-red-600 text-white px-6 ml-1 py-1 rounded-3xl"
               >

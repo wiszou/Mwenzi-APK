@@ -167,6 +167,7 @@
 
         // Optionally, you can return some information about the deleted document if needed
         const deletedData = docSnapshot.data();
+        toast.success("Deleted a note");
         return deletedData;
       } else {
         // Document does not exist

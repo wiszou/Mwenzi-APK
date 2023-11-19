@@ -1,4 +1,3 @@
-POINTS
 
 <script>
   import { auth, database } from "$lib/firebase";
