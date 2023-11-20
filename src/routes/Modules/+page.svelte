@@ -42,14 +42,16 @@
   let dateSelected;
 
   async function classCheck() {
-    const collectionRef = collection(firestore, "Subject");
-    const queryRef = query(collectionRef, where("teacherID", "==", userUID));
+    const subjectRef = collection(firestore, "Subject");
+    const queryRef = query(
+      subjectRef,
+      where("students", "array-contains", userUID)
+    );
+
     const querySnapshot = await getDocs(queryRef);
 
-    docsArray = querySnapshot.docs.map((doc) => ({
-      id: doc.id,
-      data: doc.data(),
-    }));
+    docsArray = querySnapshot.docs.map((doc) => doc.id);
+    console.log(docsArray);
   }
 
   let presentCount = 0;
@@ -461,7 +463,7 @@
   let day4status2 = "";
   let day5status2 = "";
 
-  let weekStatus = "";
+  let weekStatus = "Week 1";
 
   async function createWeeklyLesson() {
     if (selecTSub === "Select Class") {
@@ -588,35 +590,21 @@
 
         for (let day = 1; day <= 5; day++) {
           const inputElement = document.getElementById(`day${day}input`);
-          const selectElement = document.getElementById(`day${day}Select`);
-          const checkboxElement = document.getElementById(`day${day}checkbox`);
 
           const dayData = queriedData[`day${day}`];
-          if (dayData) {
-            if (dayData.Link !== null) {
-              inputElement.value = dayData.Link || "";
-            }
-
-            // Update the select value
-            if (dayData.Share !== null) {
-              selectElement.value = dayData.Share || "";
-            }
-
-            if (dayData.Status !== null) {
-              checkboxElement.checked = dayData.Status === "finish";
-            }
-          }
+					if (dayData.Share == 'Current Class') {
+						if (dayData) {
+							if (dayData.Link !== null) {
+								inputElement.value = dayData.Link || '';
+							}
+						}
+					}
         }
       } else {
         console.log("Document does not exist.");
         for (let day = 1; day <= 5; day++) {
           const inputElement = document.getElementById(`day${day}input`);
-          const selectElement = document.getElementById(`day${day}Select`);
-          const checkboxElement = document.getElementById(`day${day}checkbox`);
           inputElement.value = "";
-
-          selectElement.value = "";
-          checkboxElement.checked = "";
         }
       }
     } catch (error) {
@@ -831,14 +819,29 @@
       class="text-lg font-bold text-center justify-center"
     >   
     <select
+    id="classSelection"
+    class="select select-bordered font-medium focus:outline-1 w-full rounded-3xl max-w-xs"
+    bind:value={selecTSub}
+    on:change={(event) => {
+      change();
+    }}
+  >
+    <option disabled selected>Select Class</option>
+
+    {#each docsArray as item1}
+      <option class="rounded-xl" value={item1}>
+        {item1}
+      </option>
+    {/each}
+  </select>
+    <select
     placeholder="Select Week"
     id="weekSelector"
     bind:value={weekStatus}
     on:change={updateLessonText}
     class="select select-bordered font-medium focus:outline-1 w-full rounded-3xl max-w-xs"
   >
-    <option disabled selected class="rounded-3xl">Select Week</option>
-    <option class="rounded-3xl">Week 1</option>
+    <option class="rounded-3xl" selected>Week 1</option>
     <option class="rounded-3xl">Week 2</option>
     <option class="rounded-3xl">Week 3</option>
     <option class="rounded-3xl">Week 4</option>

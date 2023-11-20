@@ -109,96 +109,49 @@
   }
 
   async function classCheck() {
-    const collectionRef = collection(firestore, "Subject");
-    const queryRef = query(collectionRef, where("teacherID", "==", userUID));
+    const subjectRef = collection(firestore, "Subject");
+    const queryRef = query(
+      subjectRef,
+      where("students", "array-contains", userUID)
+    );
+
     const querySnapshot = await getDocs(queryRef);
 
-    docsArray = querySnapshot.docs.map((doc) => ({
-      id: doc.id,
-      data: doc.data(),
-    }));
+    docsArray = querySnapshot.docs.map((doc) => doc.id);
+    console.log(docsArray);
   }
 
-  let presentCount = 0;
-  let absentCount = 0;
+  let dateArray = {};
+  let dateArrayAsArray = [];
 
-  async function attendanceCheck(type) {
-    presentCount = 0;
-    absentCount = 0;
-    const date123 =
-      document.getElementById("dateSelector1").value || currentDatee;
-    console.log(date123);
-    console.log(currentDatee);
-    if (type === 1) {
-      const attendanceCollectionRef = collection(
-        firestore,
-        "Subject",
-        `${selecTSub}`,
-        "Attendance"
-      );
-      const attendanceDocRef = doc(attendanceCollectionRef, await currentDatee);
+  async function attendanceCheck() {
+    const attendanceCollectionRef = collection(
+      firestore,
+      "Subject",
+      `${selecTSub}`,
+      "Attendance"
+    );
 
-      return onSnapshot(attendanceDocRef, (attendanceDocSnapshot) => {
-        attendance = Object.entries(attendanceDocSnapshot.data()).map(
-          ([key, value]) => ({
-            id: key,
-            ...value,
-          })
-        );
+    // Use the getDocs function to retrieve all documents in the subcollection
+    const querySnapshot = await getDocs(attendanceCollectionRef);
 
-        // console.log(attendance);
-        // for (const record of attendance) {
-        //   if (record.status === "Present") {
-        //     presentCount++;
-        //   } else if (record.status === "Absent") {
-        //     absentCount++;
-        //   }
-        // }
+    querySnapshot.forEach((doc) => {
+      // Access the document data using doc.data()
+      const documentData = doc.data();
 
-        // console.log(presentCount, absentCount);
-        // document.getElementById("present1").textContent = presentCount;
-        // document.getElementById("absent1").textContent = absentCount;
-        fetchTime();
-        fetchNames();
-      });
-      attendance = attendance;
-    }
+      // Check if the document has the specific row
+      if (documentData[userUID]) {
+        dateArray[doc.id] = documentData[userUID];
+      }
+    });
 
-    if (type === 2) {
-      const attendanceCollectionRef = collection(
-        firestore,
-        "Subject",
-        `${selecTSub}`,
-        "Attendance"
-      );
+    dateArrayAsArray = Object.keys(dateArray).map((date) => ({
+      date,
+      ...dateArray[date],
+    }));
 
-      const attendanceDocRef = doc(attendanceCollectionRef, await date123);
-      return onSnapshot(attendanceDocRef, (attendanceDocSnapshot) => {
-        attendance = Object.entries(attendanceDocSnapshot.data()).map(
-          ([key, value]) => ({
-            id: key,
-            ...value,
-          })
-        );
-
-        // console.log(attendance);
-        // for (const record of attendance) {
-        //   if (record.status === "Present") {
-        //     presentCount++;
-        //   } else if (record.status === "Absent") {
-        //     absentCount++;
-        //   }
-        // }
-
-        // console.log(presentCount, absentCount);
-        // document.getElementById("present1").textContent = presentCount;
-        // document.getElementById("absent1").textContent = absentCount;
-        fetchTime();
-        fetchNames();
-      });
-
-      attendance = attendance;
-    }
+    dateArrayAsArray.sort((a, b) => new Date(b.date) - new Date(a.date));
+    console.log(dateArrayAsArray);
   }
 
   async function fetchNames() {
@@ -443,7 +396,7 @@
     console.log(selecTSub);
     classCheck();
     await getDates();
-    attendanceCheck(1);
+    attendanceCheck();
   }
 
   async function getuserName(id) {
@@ -560,25 +513,26 @@
       <option disabled selected>Select Class</option>
 
       {#each docsArray as item1}
-        {#if selectedSubject1 == item1.id}
-          <option selected class="rounded-xl" value={item1.id}>
-            {item1.id}
+        {#if selectedSubject1 == item1}
+          <option selected class="rounded-xl" value={item1}>
+            {item1}
           </option>
         {:else}
-          <option class="rounded-xl" value={item1.id}>
-            {item1.id}
+          <option class="rounded-xl" value={item1}>
+            {item1}
           </option>
         {/if}
       {/each}
     </select>
 
     <input
+      hidden
       id="dateSelector1"
       type="date"
       placeholder="dd/mm/yyyy"
       class="bg-white w-56 h-12 font-medium text-sm text-center mx-2 rounded-3xl border border-gray-300 px-2 focus:outline-1 focus:outline-gray-300"
       value="{current_component};"
-      on:change={() => attendanceCheck(2)}
+      on:change={() => attendanceCheck()}
     />
   </div>
 
@@ -590,22 +544,22 @@
         class="text-xs text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-400 sticky top-0"
       >
         <tr>
-          <th scope="col" class="px-5 py-4 text-left">Student</th>
+          <th scope="col" class="px-5 py-4 text-left">Date</th>
           <th scope="col" class="px-6 py-4 text-center">Time</th>
           <th scope="col" class="px-6 py-4 text-center">Status</th>
         </tr>
       </thead>
 
       <tbody>
-        {#each attendance as data}
+        {#each dateArrayAsArray as data}
           <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-            <td class="py-4 text-left pl-4">{data.name}</td>
+            <td class="py-4 text-left pl-4">{data.date}</td>
             <td class="text-center">{data.time}</td>
             <td class="text-center">
               {#if data.status == "Present" && data.late === "False"}
                 <label
                   id="studentStatus"
-                  class="px-4 py-1  text-center bg-green-500 focus:none text-white rounded-full w-22 text-xs"
+                  class="px-4 py-1 text-center bg-green-500 focus:none text-white rounded-full w-22 text-xs"
                 >
                   Present
                 </label>
@@ -616,14 +570,14 @@
                   class="px-4 py-1 text-center bg-red-500 focus:none text-white rounded-full w-22 text-xs"
                 >
                   Absent
-            </label>
+                </label>
               {/if}
               {#if data.late === "True"}
                 <label
-                  class="px-6 py-1  text-center bg-yellow-500 focus:none text-white rounded-full w-22 text-xs"
+                  class="px-6 py-1 text-center bg-yellow-500 focus:none text-white rounded-full w-22 text-xs"
                 >
                   Late
-                  </label>
+                </label>
               {/if}
             </td>
           </tr>
@@ -639,7 +593,7 @@
   >
     <div class="grid h-full max-w-lg grid-cols-4 mx-auto font-medium">
       <button
-      on:click={(event) => navigate("/Student-Attendance")}
+        on:click={(event) => navigate("/Student-Attendance")}
         type="button"
         class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group"
       >

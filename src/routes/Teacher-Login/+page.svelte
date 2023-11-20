@@ -13,7 +13,7 @@
       updateDoc,
       arrayUnion,
     } from "firebase/firestore";
-    import { userId } from "../lib/userStorage";
+    import { userId } from "../../lib/userStorage";
     import { onMount } from "svelte";
     import { browser } from "$app/environment";
     import toast, { Toaster } from "svelte-french-toast";
