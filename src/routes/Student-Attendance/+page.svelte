@@ -1,4 +1,3 @@
-
 <script>
   import { auth, database } from "$lib/firebase";
   import {
@@ -358,11 +357,10 @@
         if (fieldName) {
           attendanceData[fieldName].late = "True";
           await setDoc(attendanceDocRef, attendanceData);
-        
         }
       }
     }
-    toast.success("Status succesfully changed")
+    toast.success("Status succesfully changed");
   }
 
   async function changeStatus2(action, documentID) {
@@ -504,19 +502,8 @@
   });
 </script>
 
-<style>
-  header {
-	view-transition-name: header;
-}
-
-  #bottomnav {
-    view-transition-name: bottomnav;
-}
-
-</style>
-
 <body class="h-screen">
-  <header  class="header text-gray-600 body-font">
+  <header class="header text-gray-600 body-font">
     <!-- svelte-ignore a11y-missing-attribute -->
     <div class="mx-6 flex flex-wrap pt-5 flex-col md:flex-row items-center">
       <div class="w-full flex flex-row justify-between">
@@ -616,39 +603,27 @@
             <td class="text-center">{data.time}</td>
             <td class="text-center">
               {#if data.status == "Present" && data.late === "False"}
-                <select
-                  on:change={(event) =>
-                    changeStudentStatus(event.target.value, data.id)}
+                <label
                   id="studentStatus"
-                  class="select select-xs bg-green-500 focus:none text-white rounded-full w-22 text-xs"
+                  class="px-4 py-1  text-center bg-green-500 focus:none text-white rounded-full w-22 text-xs"
                 >
-                  <option selected>Present</option>
-                  <option>Absent</option>
-                  <option>Late</option>
-                </select>
+                  Present
+                </label>
               {/if}
               {#if data.status == "Absent" && data.late === "False"}
-                <select
-                  on:change={(event) =>
-                    changeStudentStatus(event.target.value, data.id)}
+                <label
                   id="studentStatus"
-                  class="select select-xs bg-red-500 focus:none text-white rounded-full w-22 text-xs"
+                  class="px-4 py-1 text-center bg-red-500 focus:none text-white rounded-full w-22 text-xs"
                 >
-                  <option>Present</option>
-                  <option selected>Absent</option>
-                  <option>Late</option>
-                </select>
+                  Absent
+            </label>
               {/if}
               {#if data.late === "True"}
-                <select
-                  on:change={(event) =>
-                    changeStudentStatus(event.target.value, data.id)}
-                  class="select select-xs bg-yellow-500 focus:none text-white rounded-full w-22 text-xs"
+                <label
+                  class="px-6 py-1  text-center bg-yellow-500 focus:none text-white rounded-full w-22 text-xs"
                 >
-                  <option>Present</option>
-                  <option>Absent</option>
-                  <option selected>Late</option>
-                </select>
+                  Late
+                  </label>
               {/if}
             </td>
           </tr>
@@ -659,10 +634,12 @@
 
   <!-- BOTTOM -->
   <div
-    id="bottomnav" class="fixed bottom-0 left-0 z-50 w-full h-16 bg-white border-t border-gray-200 dark:bg-gray-700 dark:border-gray-600"
+    id="bottomnav"
+    class="fixed bottom-0 left-0 z-50 w-full h-16 bg-white border-t border-gray-200 dark:bg-gray-700 dark:border-gray-600"
   >
     <div class="grid h-full max-w-lg grid-cols-4 mx-auto font-medium">
       <button
+      on:click={(event) => navigate("/Student-Attendance")}
         type="button"
         class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group"
       >
@@ -688,7 +665,7 @@
       </button>
 
       <button
-        on:click={(event) => navigate("/Points")}
+        on:click={(event) => navigate("/Student-Points")}
         type="button"
         class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group"
       >
@@ -713,7 +690,7 @@
         >
       </button>
       <button
-        on:click={(event) => navigate("/Notes")}
+        on:click={(event) => navigate("/Student-Notes")}
         type="button"
         class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group"
       >
@@ -735,7 +712,7 @@
         >
       </button>
       <button
-        on:click={(event) => navigate("/Actions")}
+        on:click={(event) => navigate("/Modules")}
         type="button"
         class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group"
       >
@@ -753,7 +730,7 @@
         </svg>
         <span
           class="text-sm text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500"
-          >Actions</span
+          >Modules</span
         >
       </button>
     </div>
@@ -762,13 +739,23 @@
 </body>
 
 <!-- <style>
-  /* Style for the toggle when it's checked (toggled) */
-  .toggle-success:checked {
-    background-color: #10b981; /* Green color */
+    /* Style for the toggle when it's checked (toggled) */
+    .toggle-success:checked {
+      background-color: #10b981; /* Green color */
+    }
+  
+    /* Default style for the toggle when it's not checked (not toggled) */
+    .toggle-success {
+      background-color: #ef4444; /* Red color */
+    }
+  </style> -->
+
+<style>
+  header {
+    view-transition-name: header;
   }
 
-  /* Default style for the toggle when it's not checked (not toggled) */
-  .toggle-success {
-    background-color: #ef4444; /* Red color */
+  #bottomnav {
+    view-transition-name: bottomnav;
   }
-</style> -->
+</style>

@@ -1,4 +1,3 @@
-
 <script>
   import { auth, database } from "$lib/firebase";
   import {
@@ -300,7 +299,6 @@
             } else {
               toast.error("Please select a valid group size.");
               console.log("Please select a valid group size.");
-
             }
           }
         }
@@ -784,609 +782,279 @@
   getDate();
 </script>
 
+<header class="text-gray-600 body-font">
+  <!-- svelte-ignore a11y-missing-attribute -->
+  <div class="mx-6 flex flex-wrap pt-5 flex-col md:flex-row items-center">
+    <div class="w-full flex flex-row justify-between">
+      <nav class="flex">
+        <!-- svelte-ignore a11y-missing-attribute -->
+        <img src="Mwenzi5.png" class="h-14 pb-2" alt="..." />
+      </nav>
+      <div class="flex flex-row">
+        <p class="font-medium text-md my-auto mr-3" id="userName">
+          Hi, Mwenzi Teacher
+        </p>
+        <button class="dropdown dropdown-end">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="28"
+            height="28"
+            fill="green"
+            class="bi bi-person-circle"
+            viewBox="0 0 16 16"
+          >
+            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+            <path
+              fill-rule="evenodd"
+              d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"
+            />
+          </svg>
+          <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
+          <ul
+            tabindex="0"
+            class="text-center rounded-2xl mt-2 dropdown-content shadow bg-base-100 w-24"
+          >
+            <li class="rounded-2xl hover:bg-gray-200">
+              <a class=" py-1 flex justify-center font-medium text-sm"
+                >Log out</a
+              >
+            </li>
+          </ul>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="mx-6 mt-4">
+    <div
+      class="text-lg font-bold text-center justify-center"
+    >   
+    <select
+    placeholder="Select Week"
+    id="weekSelector"
+    bind:value={weekStatus}
+    on:change={updateLessonText}
+    class="select select-bordered font-medium focus:outline-1 w-full rounded-3xl max-w-xs"
+  >
+    <option disabled selected class="rounded-3xl">Select Week</option>
+    <option class="rounded-3xl">Week 1</option>
+    <option class="rounded-3xl">Week 2</option>
+    <option class="rounded-3xl">Week 3</option>
+    <option class="rounded-3xl">Week 4</option>
+    <option class="rounded-3xl">Week 5</option>
+    <option class="rounded-3xl">Week 6</option>
+    <option class="rounded-3xl">Week 7</option>
+    <option class="rounded-3xl">Week 8</option>
+  </select>
+
+    </div>
+
+    <div
+      class="w-full flex flex-col mx-auto
+   py-3 outline rounded-3xl outline-gray-50 mt-5"
+    >
+      <div class="mx-auto w-full mt-3 pr-3 pl-1">
+        <!--WEEK-->
+        <div class="flex flex-row justify-center">
+         
+        </div>
+        <h1 class="text-left mt-2 mb-3 ml-5 text-sm">Day 1</h1>
+        <div class="flex items-center mt-1 pl-4">
+          <input
+            id="day1input"
+            type="text"
+            bind:value={day1x}
+            placeholder="www.googledrive.com/lesson1/"
+            class="input input-bordered w-11/12 focus:border-none cursor-pointer text-sm"
+            readonly
+          />
+          <button
+            class="text-sm text-blue-500 hover:text-blue-400 ml-1"
+            on:click={() => redirectToLink("day1input")}>Open Link</button
+          >
+        </div>
+
+        <h1 class="text-left mt-3 mb-3 ml-5 text-sm">Day 2</h1>
+        <div class="flex items-center mt-1 pl-4">
+          <input
+            bind:value={day2x}
+            id="day2input"
+            type="text"
+            placeholder="www.googledrive.com/lesson1/"
+            class="input input-bordered w-11/12 focus:border-none cursor-pointer text-sm"
+            readonly
+          />
+          <button
+            class="text-sm text-blue-500 hover:text-blue-400 ml-1"
+            on:click={() => redirectToLink("day2input")}>Open Link</button
+          >
+        </div>
+
+        <h1 class="text-left mt-3 mb-3 ml-5 text-sm">Day 3</h1>
+        <div class="flex items-center mt-1 pl-4">
+          <input
+            bind:value={day3x}
+            id="day3input"
+            type="text"
+            placeholder="www.googledrive.com/lesson1/"
+            class="input input-bordered w-11/12 focus.border-none cursor-pointer text-sm"
+            readonly
+          />
+          <button
+            class="text-sm text-blue-500 hover:text-blue-400 ml-1"
+            on:click={() => redirectToLink("day3input")}>Open Link</button
+          >
+        </div>
+
+        <h1 class="text-left mt-3 mb-3 ml-5 text-sm">Day 4</h1>
+        <div class="flex items-center mt-1 pl-4">
+          <input
+            bind:value={day4x}
+            id="day4input"
+            type="text"
+            placeholder="www.googledrive.com/lesson1/"
+            class="input input-bordered w-11/12 focus:border-none cursor-pointer text-sm"
+            readonly
+          />
+          <button
+            class="text-sm text-blue-500 hover:text-blue-400 ml-1"
+            on:click={() => redirectToLink("day4input")}>Open Link</button
+          >
+        </div>
+
+        <h1 class="text-left mt-3 mb-3 ml-5 text-sm">Day 5</h1>
+        <div class="flex items-center mt-1 pl-4">
+          <input
+            bind:value={day5x}
+            id="day5input"
+            type="text"
+            placeholder="www.googledrive.com/lesson1/"
+            class="input input-bordered w-11/12 focus.border-none cursor-pointer text-sm"
+            readonly
+          />
+          <button
+            class="text-sm text-blue-500 hover:text-blue-400 ml-1"
+            on:click={() => redirectToLink("day5input")}>Open Link</button
+          >
+        </div>
+        <!--END WEEK-->
+      </div>
+
+    </div>
+</div>
+
+<!-- BOTTOM -->
+<div
+  id="bottomnav"
+  class="fixed bottom-0 left-0 z-50 w-full h-16 bg-white border-t border-gray-200 dark:bg-gray-700 dark:border-gray-600"
+>
+  <div class="grid h-full max-w-lg grid-cols-4 mx-auto font-medium">
+    <button
+      type="button"
+      class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group"
+      on:click={(event) => navigate("/Student-Attendance")}
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="27"
+        height="28"
+        fill="currentColor"
+        class="bi bi-person-fill-check text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500"
+        viewBox="0 0 16 16"
+      >
+        <path
+          d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm1.679-4.493-1.335 2.226a.75.75 0 0 1-1.174.144l-.774-.773a.5.5 0 0 1 .708-.708l.547.548 1.17-1.951a.5.5 0 1 1 .858.514ZM11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+        />
+        <path
+          d="M2 13c0 1 1 1 1 1h5.256A4.493 4.493 0 0 1 8 12.5a4.49 4.49 0 0 1 1.544-3.393C9.077 9.038 8.564 9 8 9c-5 0-6 3-6 4Z"
+        />
+      </svg>
+      <span
+        class="text-sm text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500"
+        >Attendance</span
+      >
+    </button>
+
+    <button
+      on:click={(event) => navigate("/Student-Points")}
+      type="button"
+      class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="25"
+        height="28"
+        fill="currentColor"
+        class="bi bi-award-fill text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500"
+        viewBox="0 0 16 16"
+      >
+        <path
+          d="m8 0 1.669.864 1.858.282.842 1.68 1.337 1.32L13.4 6l.306 1.854-1.337 1.32-.842 1.68-1.858.282L8 12l-1.669-.864-1.858-.282-.842-1.68-1.337-1.32L2.6 6l-.306-1.854 1.337-1.32.842-1.68L6.331.864 8 0z"
+        />
+        <path
+          d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1 4 11.794z"
+        />
+      </svg>
+      <span
+        class="text-sm text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500"
+        >Points</span
+      >
+    </button>
+    <button
+      on:click={(event) => navigate("/Student-Notes")}
+      type="button"
+      class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="28"
+        fill="currentColor"
+        class="bi bi-sticky-fill text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500"
+        viewBox="0 0 17 17"
+      >
+        <path
+          d="M2.5 1A1.5 1.5 0 0 0 1 2.5v11A1.5 1.5 0 0 0 2.5 15h6.086a1.5 1.5 0 0 0 1.06-.44l4.915-4.914A1.5 1.5 0 0 0 15 8.586V2.5A1.5 1.5 0 0 0 13.5 1h-11zm6 8.5a1 1 0 0 1 1-1h4.396a.25.25 0 0 1 .177.427l-5.146 5.146a.25.25 0 0 1-.427-.177V9.5z"
+        />
+      </svg>
+      <span
+        class="text-sm text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500"
+        >Notes</span
+      >
+    </button>
+    <button
+      on:click={(event) => navigate("/Modules")}
+      type="button"
+      class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="25"
+        height="28"
+        fill="currentColor"
+        class="bi bi-grid-fill text-blue-500 dark:text-blue-400 group-hover:text-blue-600 dark:group-hover:text-blue-500"
+        viewBox="0 0 17 17"
+      >
+        <path
+          d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5v-3zm8 0A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5v-3zm-8 8A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5v-3zm8 0A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5v-3z"
+        />
+      </svg>
+      <span
+        class="text-sm text-blue-500 dark:text-blue-400 group-hover:text-blue-600 dark:group-hover:text-blue-500"
+        >Modules</span
+      >
+    </button>
+  </div>
+</div>
+<Toaster />
+
 <style>
   header {
-	view-transition-name: header;
-}
+    view-transition-name: header;
+  }
 
   #bottomnav {
     view-transition-name: bottomnav;
-} 
+  }
 </style>
-
-
-<body class="h-screen">
-  <header class="text-gray-600 body-font">
-    <!-- svelte-ignore a11y-missing-attribute -->
-    <div class="mx-6 flex flex-wrap pt-5 flex-col md:flex-row items-center">
-      <div class="w-full flex flex-row justify-between">
-        <nav class="flex">
-          <!-- svelte-ignore a11y-missing-attribute -->
-          <img src="Mwenzi5.png" class="h-14 pb-2" alt="..." />
-        </nav>
-        <div class="flex flex-row">
-          <p class="font-medium text-md my-auto mr-3" id="userName">
-            Hi, Mwenzi Teacher
-          </p>
-          <button class="dropdown dropdown-end">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="28"
-              height="28"
-              fill="green"
-              class="bi bi-person-circle"
-              viewBox="0 0 16 16"
-            >
-              <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
-              <path
-                fill-rule="evenodd"
-                d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"
-              />
-            </svg>
-            <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
-            <ul
-              tabindex="0"
-              class="text-center rounded-2xl mt-2 dropdown-content shadow bg-base-100 w-24"
-            >
-              <li class="rounded-2xl hover:bg-gray-200">
-                <a class=" py-1 flex justify-center font-medium text-sm"
-                  >Log out</a
-                >
-              </li>
-            </ul>
-          </button>
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <div class="flex justify-center mt-4 mx-6">
-    <select
-      id="classSelection"
-      class="select select-bordered font-medium focus:outline-1 w-full rounded-3xl max-w-xs"
-      bind:value={selecTSub}
-      on:change={(event) => {
-        change();
-      }}
-    >
-      <option disabled selected>Select Class</option>
-
-      {#each docsArray as item1}
-        <option class="rounded-xl" value={item1.id}>
-          {item1.id}
-        </option>
-      {/each}
-    </select>
-  </div>
-
-  <div class="flex justify-center mt-4 flex-col items-center w-full gap-2">
-    <!--RANDOMIZER-->
-    <div
-      class="w-80 bg-red-600 bg-opacity-75 rounded-3xl text-center shadow-lg"
-    >
-      <div class="flex flex-row mt-2">
-        <img src="randomizer.png" class="h-7 mt-1 pl-6" alt="..." />
-        <h1 class="pl-1 pt-2 font-medium text-md text-white">Randomizer</h1>
-      </div>
-      <!--RAN MODAL-->
-      <label
-        for="randomizer"
-        class="my-4 btn h-20 w-56 bg-white text-red-600 border-transparent hover:bg-red-100 hover:border-none text-base rounded-3xl"
-        >Pick</label
-      >
-      <input type="checkbox" id="randomizer" class="modal-toggle" />
-      <div class="modal">
-        <div class="modal-box relative h-96">
-          <label
-            for="randomizer"
-            class="btn btn-sm btn-circle absolute right-2 top-2">✕</label
-          >
-          <h3 class="text-xl font-bold text-center">Randomizer</h3>
-          <div class="mt-6 mb-1">
-            <select
-              bind:value={recitationType}
-              class="w-1/2 mr-1 border-gray-200 h-6 font-medium text-sm text-center border border-gray focus:none rounded-3xl shadow-sm"
-            >
-              <option class="rounded-3xl" selected>Present Only</option>
-              <option class="rounded-3xl">All Students</option>
-            </select>
-          </div>
-          <div class="divider mt-5" />
-          <p class="font-medium text-lg text-center" id="randomizerName">
-            STUDENT NAME
-          </p>
-          <div class="divider" />
-
-          <div class="flex flex-row justify-center">
-            <button
-              on:click={resetRecitation}
-              id="resetButton"
-              class="start-button btn mt-8 w-40 mx-1 text-white rounded-3xl bg-[#EF5051] hover:bg-red-600 border-none"
-              >Reset</button
-            >
-            <button
-              on:click={getRandomName}
-              class="start-button btn mt-8 w-40 mx-1 text-white rounded-3xl bg-[#EF5051] hover:bg-red-600 border-none"
-              >Start</button
-            >
-          </div>
-        </div>
-      </div>
-    </div>
-    <!--END RAN MODAL-->
-
-    <!--GROUP CREATOR-->
-    <div
-      class="w-80 bg-green-500 bg-opacity-75 rounded-3xl text-center shadow-lg mr-2"
-    >
-      <div class="flex flex-row mt-2">
-        <img src="group.png" class="h-7 mt-1 pl-6" alt="..." />
-        <h1 class="pl-2 pt-2 font-medium text-md text-white">Group Creator</h1>
-      </div>
-
-      <!--GRP CREATOR MODAL-->
-      <label
-        for="GroupCreator"
-        class="my-4 btn h-20 w-56 bg-white text-green-500 border-transparent hover:bg-green-100 hover:border-none text-base rounded-3xl"
-        >Create</label
-      >
-      <input type="checkbox" id="GroupCreator" class="modal-toggle" />
-      <div class="modal">
-        <div class="modal-box relative h-auto">
-          <label
-            for="GroupCreator"
-            class="btn btn-sm btn-circle absolute right-2 top-2">✕</label
-          >
-          <h3 class="text-xl font-bold text-center">Group Creator</h3>
-          <p class="mt-7 mb-2 font-medium">Group By</p>
-          <div class="mt-3 mb-1 flex flex-row mx-10">
-            <select
-              bind:value={groupType}
-              class="w-1/2 mr-1 border-gray-200 h-6 font-medium text-sm text-center border border-gray focus:none rounded-3xl shadow-sm"
-              id=""
-              type="number"
-            >
-              <option disabled selected class="rounded-3xl">Select</option>
-              <option class="rounded-3xl">Present Only</option>
-              <option class="rounded-3xl">All Students</option>
-            </select>
-            <input
-              class="w-1/2 ml-1 border-gray-200 h-6 font-medium text-sm text-center border border-gray focus:none rounded-3xl shadow-sm"
-              id="groupSize"
-              type="number"
-              placeholder="# of Members"
-            />
-          </div>
-          <button
-            on:click={groupStudents}
-            class="text-white start-button btn mt-4 w-1/2 rounded-3xl bg-green-500 hover:bg-green-700 border-none transform transition-transform focus:scale-100 active:scale-95"
-            >Create</button
-          >
-
-          <div class="divider" />
-          <div
-            class="relative overflow-y-auto shadow-sm rounded-xl mx-5 my-7 max-h-80"
-          >
-            <table class="w-full text-sm text-gray-500 dark:text-gray-400">
-              <thead
-                class="text-xs text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-400 sticky top-0"
-              >
-                <tr>
-                  <th scope="col" class="px-6 py-4 text-center">Group #</th>
-                  <th scope="col" class="px-6 py-4 text-center">Members</th>
-                </tr>
-              </thead>
-              <tbody id="groupTableBody" />
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!--END GRP CREATOR MODAL-->
-
-    <!--JAMBOARD-->
-    <div
-      class="w-80 bg-purple-500 bg-opacity-75 rounded-3xl text-center shadow-lg mr-2"
-    >
-      <div class="flex flex-row mt-2">
-        <img src="jamboard.png" class="h-7 mt-1 pl-6" alt="..." />
-        <h1 class="pl-1 pt-2 font-medium text-md text-white">Jamboard</h1>
-      </div>
-
-      <!--JAM MODAL-->
-      <label
-        for="Jamboard"
-        class="my-4 btn h-20 w-56 bg-white text-purple-500 hover:bg-purple-100 border-transparent hover:border-none text-base rounded-3xl"
-        >Draw</label
-      >
-      <input type="checkbox" id="Jamboard" class="modal-toggle" />
-      <div class="modal">
-        <div class="modal-box relative h-5/6 max-w-6xl">
-          <label
-            for="Jamboard"
-            class="btn btn-sm btn-circle absolute right-2 top-2">✕</label
-          >
-          <h3 class="mt-5 text-xl font-bold text-center">Jamboard</h3>
-          <iframe
-            title="Jamboard"
-            class="mt-14 w-full h-4/5"
-            src="https://www.web-whiteboard.io/"
-          />
-        </div>
-      </div>
-    </div>
-    <!--END JAM MODAL-->
-
-    <!--LESSON PLAN-->
-    <div
-      class="w-80 bg-blue-500 bg-opacity-75 rounded-3xl text-center shadow-lg mr-1"
-    >
-      <div class="flex flex-row mt-2">
-        <img src="lessonplan.png" class="h-7 mt-1 pl-6" alt="..." />
-        <h1 class="pl-1 pt-2 font-medium text-md text-white">
-          Learning Materials
-        </h1>
-      </div>
-
-      <label
-        for="lessonplan"
-        class="my-4 btn h-20 w-56 bg-white text-blue-500 border-transparent hover:bg-blue-100 hover:border-none text-base rounded-3xl"
-        >Open</label
-      >
-      <input type="checkbox" id="lessonplan" class="modal-toggle" />
-      <div class="modal">
-        <div class="modal-box relative h-9/12 max-w-3xl">
-          <label
-            for="lessonplan"
-            class="btn btn-sm btn-circle absolute right-2 top-2">✕</label
-          >
-
-          <div
-            class="text-xl font-bold text-center w-full justify-center flex flex-row"
-          >
-            <p>Learning Materials</p>
-            <span />
-          </div>
-
-          <div
-            class="w-full flex flex-col mx-auto
-       py-3 outline rounded-3xl outline-gray-50 mt-5"
-          >
-            <div class="mx-auto w-full mt-3 pr-3 pl-1">
-              <!--WEEK-->
-              <div class="flex flex-row justify-center">
-                <select
-                  id="weekSelector"
-                  bind:value={weekStatus}
-                  on:change={updateLessonText}
-                  class="w-40 border-gray-200 h-8 font-medium text-sm text-center border border-gray focus:none rounded-3xl shadow-sm"
-                >
-                  <option disabled selected class="rounded-3xl"
-                    >Select Week</option
-                  >
-                  <option class="rounded-3xl">Week 1</option>
-                  <option class="rounded-3xl">Week 2</option>
-                  <option class="rounded-3xl">Week 3</option>
-                  <option class="rounded-3xl">Week 4</option>
-                  <option class="rounded-3xl">Week 5</option>
-                  <option class="rounded-3xl">Week 6</option>
-                  <option class="rounded-3xl">Week 7</option>
-                  <option class="rounded-3xl">Week 8</option>
-                </select>
-              </div>
-              <div class="divider my-0 mt-3" />
-
-              <h1 class="text-left mt-2 ml-5 text-sm">Day 1</h1>
-              <div class="flex items-center mt-1 pl-4">
-                <select
-                  bind:value={day1status2}
-                  id="day1Select"
-                  class="w-32 border-gray-200 h-8 font-medium text-xs text-center mr-3 border border-gray focus:none rounded-3xl shadow-sm"
-                >
-                  <option disabled selected class="rounded-3xl">Share</option>
-                  <option class="rounded-3xl">Only Me</option>
-                  <option class="rounded-3xl">Current Class</option>
-                </select>
-                <input
-                  id="day1input"
-                  type="text"
-                  bind:value={day1x}
-                  placeholder="www.googledrive.com/lesson1/"
-                  class="input input-bordered w-11/12 focus:border-none cursor-pointer text-sm"
-                  readonly
-                />
-                <button
-                  class="text-sm text-blue-500 hover:text-blue-400 ml-1"
-                  on:click={() => redirectToLink("day1input")}>Open Link</button
-                >
-                <input
-                  bind:value={day1status}
-                  on:change={() => {
-                    day1status = day1status === "finish" ? "" : "finish";
-                  }}
-                  id="day1checkbox"
-                  type="checkbox"
-                  class="checkbox h-8 w-8 ml-2"
-                  disabled="disabled"
-                />
-              </div>
-
-              <h1 class="text-left mt-2 ml-5 text-sm">Day 2</h1>
-              <div class="flex items-center mt-1 pl-4">
-                <select
-                  id="day2Select"
-                  bind:value={day2status2}
-                  class="w-32 border-gray-200 h-8 font-medium text-xs text-center mr-3 border border-gray focus:none rounded-3xl shadow-sm"
-                >
-                  <option disabled selected class="rounded-3xl">Share</option>
-                  <option class="rounded-3xl">Only Me</option>
-                  <option class="rounded-3xl">Current Class</option>
-                </select>
-                <input
-                  bind:value={day2x}
-                  id="day2input"
-                  type="text"
-                  placeholder="www.googledrive.com/lesson1/"
-                  class="input input-bordered w-11/12 focus:border-none cursor-pointer text-sm"
-                  readonly
-                />
-                <button
-                  class="text-sm text-blue-500 hover:text-blue-400 ml-1"
-                  on:click={() => redirectToLink("day2input")}>Open Link</button
-                >
-                <input
-                  bind:value={day2status}
-                  id="day2checkbox"
-                  type="checkbox"
-                  class="checkbox h-8 w-8 ml-2"
-                  disabled="disabled"
-                />
-              </div>
-
-              <h1 class="text-left mt-2 ml-5 text-sm">Day 3</h1>
-              <div class="flex items-center mt-1 pl-4">
-                <select
-                  bind:value={day3status2}
-                  id="day3Select"
-                  class="w-32 border-gray-200 h-8 font-medium text-xs text-center mr-3 border border-gray focus:none rounded-3xl shadow-sm"
-                >
-                  <option disabled selected class="rounded-3xl">Share</option>
-                  <option class="rounded-3xl">Only Me</option>
-                  <option class="rounded-3xl">Current Class</option>
-                </select>
-                <input
-                  bind:value={day3x}
-                  id="day3input"
-                  type="text"
-                  placeholder="www.googledrive.com/lesson1/"
-                  class="input input-bordered w-11/12 focus.border-none cursor-pointer text-sm"
-                  readonly
-                />
-                <button
-                  class="text-sm text-blue-500 hover:text-blue-400 ml-1"
-                  on:click={() => redirectToLink("day3input")}>Open Link</button
-                >
-                <input
-                  bind:value={day3status}
-                  id="day3checkbox"
-                  type="checkbox"
-                  class="checkbox h-8 w-8 ml-2"
-                  disabled="disabled"
-                />
-              </div>
-
-              <h1 class="text-left mt-2 ml-5 text-sm">Day 4</h1>
-              <div class="flex items-center mt-1 pl-4">
-                <select
-                  bind:value={day4status2}
-                  id="day4Select"
-                  class="w-32 border-gray-200 h-8 font-medium text-xs text-center mr-3 border border-gray focus:none rounded-3xl shadow-sm"
-                >
-                  <option disabled selected class="rounded-3xl">Share</option>
-                  <option class="rounded-3xl">Only Me</option>
-                  <option class="rounded-3xl">Current Class</option>
-                </select>
-                <input
-                  bind:value={day4x}
-                  id="day4input"
-                  type="text"
-                  placeholder="www.googledrive.com/lesson1/"
-                  class="input input-bordered w-11/12 focus:border-none cursor-pointer text-sm"
-                  readonly
-                />
-                <button
-                  class="text-sm text-blue-500 hover:text-blue-400 ml-1"
-                  on:click={() => redirectToLink("day4input")}>Open Link</button
-                >
-                <input
-                  bind:value={day4status}
-                  id="day4checkbox"
-                  type="checkbox"
-                  class="checkbox h-8 w-8 ml-2"
-                  disabled="disabled"
-                />
-              </div>
-
-              <h1 class="text-left mt-2 ml-5 text-sm">Day 5</h1>
-              <div class="flex items-center mt-1 pl-4">
-                <select
-                  bind:value={day5status2}
-                  id="day5Select"
-                  class="w-32 border-gray-200 h-8 font-medium text-xs text-center mr-3 border border-gray focus:none rounded-3xl shadow-sm"
-                >
-                  <option disabled selected class="rounded-3xl">Share</option>
-                  <option class="rounded-3xl">Only Me</option>
-                  <option class="rounded-3xl">Current Class</option>
-                </select>
-                <input
-                  bind:value={day5x}
-                  id="day5input"
-                  type="text"
-                  placeholder="www.googledrive.com/lesson1/"
-                  class="input input-bordered w-11/12 focus.border-none cursor-pointer text-sm"
-                  readonly
-                />
-                <button
-                  class="text-sm text-blue-500 hover:text-blue-400 ml-1"
-                  on:click={() => redirectToLink("day5input")}>Open Link</button
-                >
-                <input
-                  bind:value={day5status}
-                  id="day5checkbox"
-                  type="checkbox"
-                  class="checkbox h-8 w-8 ml-2"
-                  disabled="disabled"
-                />
-              </div>
-              <!--END WEEK-->
-            </div>
-
-            <div class="justify-between flex mt-9 mb-2 mx-4">
-              <button
-              on:click={resetWeeklyLesson}
-                id=""
-                class="text-sm font-medium bg-red-500 hover:bg-red-600 text-white px-6 ml-1 py-1 rounded-3xl"
-              >
-                Reset</button
-              >
-              <div class="flex flex-row">
-                <button
-                  on:click={toggleEditButton}
-                  id="editButton"
-                  class="text-sm font-medium bg-blue-500 hover:bg-blue-600 text-white px-6 ml-1 py-1 rounded-3xl"
-                >
-                  Edit</button
-                >
-                <button
-                  on:click={toggleEditButton}
-                  on:click={createWeeklyLesson}
-                  id="saveButton1"
-                  class="text-sm font-medium bg-green-500 hover:bg-green-600 text-white px-6 ml-1 py-1 rounded-3xl pointer-events-none"
-                >
-                  Save
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- BOTTOM -->
-  <div
-    id="bottomnav" class="fixed bottom-0 left-0 z-50 w-full h-16 bg-white border-t border-gray-200 dark:bg-gray-700 dark:border-gray-600"
-  >
-    <div class="grid h-full max-w-lg grid-cols-4 mx-auto font-medium">
-      <button
-        type="button"
-        class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group"
-        on:click={(event) => navigate("/Attendance")}
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="27"
-          height="28"
-          fill="currentColor"
-          class="bi bi-person-fill-check text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500"
-          viewBox="0 0 16 16"
-        >
-          <path
-            d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm1.679-4.493-1.335 2.226a.75.75 0 0 1-1.174.144l-.774-.773a.5.5 0 0 1 .708-.708l.547.548 1.17-1.951a.5.5 0 1 1 .858.514ZM11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
-          />
-          <path
-            d="M2 13c0 1 1 1 1 1h5.256A4.493 4.493 0 0 1 8 12.5a4.49 4.49 0 0 1 1.544-3.393C9.077 9.038 8.564 9 8 9c-5 0-6 3-6 4Z"
-          />
-        </svg>
-        <span
-          class="text-sm text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500"
-          >Attendance</span
-        >
-      </button>
-
-      <button
-        on:click={(event) => navigate("/Points")}
-        type="button"
-        class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="25"
-          height="28"
-          fill="currentColor"
-          class="bi bi-award-fill text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500"
-          viewBox="0 0 16 16"
-        >
-          <path
-            d="m8 0 1.669.864 1.858.282.842 1.68 1.337 1.32L13.4 6l.306 1.854-1.337 1.32-.842 1.68-1.858.282L8 12l-1.669-.864-1.858-.282-.842-1.68-1.337-1.32L2.6 6l-.306-1.854 1.337-1.32.842-1.68L6.331.864 8 0z"
-          />
-          <path
-            d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1 4 11.794z"
-          />
-        </svg>
-        <span
-          class="text-sm text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500"
-          >Points</span
-        >
-      </button>
-      <button
-        on:click={(event) => navigate("/Notes")}
-        type="button"
-        class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="28"
-          fill="currentColor"
-          class="bi bi-sticky-fill text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500"
-          viewBox="0 0 17 17"
-        >
-          <path
-            d="M2.5 1A1.5 1.5 0 0 0 1 2.5v11A1.5 1.5 0 0 0 2.5 15h6.086a1.5 1.5 0 0 0 1.06-.44l4.915-4.914A1.5 1.5 0 0 0 15 8.586V2.5A1.5 1.5 0 0 0 13.5 1h-11zm6 8.5a1 1 0 0 1 1-1h4.396a.25.25 0 0 1 .177.427l-5.146 5.146a.25.25 0 0 1-.427-.177V9.5z"
-          />
-        </svg>
-        <span
-          class="text-sm text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500"
-          >Notes</span
-        >
-      </button>
-      <button
-        on:click={(event) => navigate("/Actions")}
-        type="button"
-        class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="25"
-          height="28"
-          fill="currentColor"
-          class="bi bi-grid-fill text-blue-500 dark:text-blue-400 group-hover:text-blue-600 dark:group-hover:text-blue-500"
-          viewBox="0 0 17 17"
-        >
-          <path
-            d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5v-3zm8 0A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5v-3zm-8 8A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5v-3zm8 0A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5v-3z"
-          />
-        </svg>
-        <span
-          class="text-sm text-blue-500 dark:text-blue-400 group-hover:text-blue-600 dark:group-hover:text-blue-500"
-          >Actions</span
-        >
-      </button>
-    </div>
-  </div>
-  <Toaster />
-</body>
-
-<!-- <style>
-      /* Style for the toggle when it's checked (toggled) */
-      .toggle-success:checked {
-        background-color: #10b981; /* Green color */
-      }
-    
-      /* Default style for the toggle when it's not checked (not toggled) */
-      .toggle-success {
-        background-color: #ef4444; /* Red color */
-      }
-    </style>
-     -->
