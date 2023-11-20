@@ -8,6 +8,7 @@
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, viewport-fit=cover" />
     
 		<link href="./_app/immutable/assets/0.ef120b20.css" rel="stylesheet">
+		<link href="./_app/immutable/assets/Toaster.3a6d0da3.css" rel="stylesheet">
 		<link rel="modulepreload" href="./_app/immutable/entry/start.7c6b4ec2.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/scheduler.1f72109c.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/singletons.70b11b42.js">
@@ -15,7 +16,9 @@
 		<link rel="modulepreload" href="./_app/immutable/chunks/index.b6362bb0.js">
 		<link rel="modulepreload" href="./_app/immutable/nodes/0.2e1e80e2.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/navigation.4854b6b4.js">
-		<link rel="modulepreload" href="./_app/immutable/nodes/2.bc574ea3.js">
+		<link rel="modulepreload" href="./_app/immutable/nodes/12.298eba45.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/Toaster.svelte_svelte_type_style_lang.9536831a.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/Toaster.44b2d701.js">
     <style>
       * {
         box-sizing: border-box;
@@ -41,7 +44,7 @@
     </style>
   </head>
   <body data-sveltekit-preload-data="hover">
-    <div style="display: contents">  <div class="pb-5 flex items-center justify-center min-h-screen px-5" data-svelte-h="svelte-tfdc3u"><div class="container mx-auto"><div class="max-w-md mx-auto"><div class="flex justify-center"><img src="Mwenzi5.png" class="w-64 duration-500 hover:scale-105 hover:-translate-10" alt="logo"></div> <div class="flex flex-col justify-center items-center mt-5 mx-12"> <a href="/Teacher-Login" id="Teacher"><button type="button" class="flex bg-white shadow-lg text-black hover:text-white border-2 border-transparent rounded-3xl px-16 py-1 mb-4 w-full hover:bg-[#1e7d3f] duration-300 hover:scale-105"><div class="w-40"><div class="flex items-center justify-start"><img src="teacher.png" class="h-10 pr-2 pt-1" alt="..."> <span class="font-medium">I&#39;m a Teacher</span></div></div></button></a> <a href="/Student-Login" id="Student"><button type="button" class="flex bg-white text-black hover:text-white border-2 border-transparent shadow-lg rounded-3xl px-16 py-1 mb-4 w-full hover:bg-[#1e7d3f] duration-300 hover:scale-105"><div class="w-40"><div class="flex items-center justify-start"><img src="student.png" class="h-10 pr-2 pt-1" alt="..."> <span class="font-medium">I&#39;m a Student</span></div></div></button></a></div></div></div></div> 
+    <div style="display: contents">  <div class="pb-5 flex items-center justify-center min-h-screen px-5"><div class="container mx-auto"><div class="max-w-md mx-auto"><div class="flex justify-center" data-svelte-h="svelte-1luhezu"><a href="/.."><img src="Mwenzi5.png" class="w-64 duration-500 hover:scale-105 hover:-translate-10" alt="..."></a></div> <div class="mt-7 mx-12"><form><div class="mb-4"><label for="email" class="block mb-2 text-md font-medium text-gray" data-svelte-h="svelte-onvlzj">Email</label> <input type="email" name="email" id="email" placeholder="Email" class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-3xl focus:outline-none" value=""></div> <div class="mb-5"><label for="password" class="block mb-2 text-md font-medium text-gray" data-svelte-h="svelte-1x6bsft">Password</label> <input type="password" name="password" id="password" placeholder="Password" class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-3xl focus:outline-none" value=""></div> <button class="w-full px-3 py-3 mt-1 text-white bg-[#2ea44f] focus:outline-none font-medium rounded-3xl hover:bg-[#1e7d3f] duration-300 hover:scale-105" data-svelte-h="svelte-wdapb1">Log In</button></form></div></div></div></div> <div class="toaster  svelte-1phplh9" role="alert"> </div> 
 			
 			<script>
 				{
@@ -59,7 +62,7 @@
 						import("./_app/immutable/entry/app.cd5a71a0.js")
 					]).then(([kit, app]) => {
 						kit.start(app, element, {
-							node_ids: [0, 2],
+							node_ids: [0, 12],
 							data,
 							form: null,
 							error: null

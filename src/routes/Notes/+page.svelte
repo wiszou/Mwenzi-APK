@@ -424,11 +424,11 @@
               tabindex="0"
               class="text-center rounded-2xl mt-2 dropdown-content shadow bg-base-100 w-24"
             >
-              <li class="rounded-2xl hover:bg-gray-200">
-                <a class=" py-1 flex justify-center font-medium text-md"
-                  >Log out</a
-                >
-              </li>
+            <li class="rounded-2xl hover:bg-gray-200">
+              <a  on:click={(event) => navigate("/Teacher-Login")} class=" py-1 flex justify-center font-medium text-sm"
+                >Log out</a
+              >
+            </li>
             </ul>
           </button>
         </div>

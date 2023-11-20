@@ -829,7 +829,7 @@
               class="text-center rounded-2xl mt-2 dropdown-content shadow bg-base-100 w-24"
             >
               <li class="rounded-2xl hover:bg-gray-200">
-                <a class=" py-1 flex justify-center font-medium text-sm"
+                <a  on:click={(event) => navigate("/Teacher-Login")} class=" py-1 flex justify-center font-medium text-sm"
                   >Log out</a
                 >
               </li>
@@ -1258,7 +1258,6 @@
                   Edit</button
                 >
                 <button
-                  on:click={toggleEditButton}
                   on:click={createWeeklyLesson}
                   id="saveButton1"
                   class="text-sm font-medium bg-green-500 hover:bg-green-600 text-white px-6 ml-1 py-1 rounded-3xl pointer-events-none"

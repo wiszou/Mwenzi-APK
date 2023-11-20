@@ -270,19 +270,18 @@
     sortRecitation();
   }
 
-  async function getuserName(id) {
-    const queryRef1 = collection(firestore, "users");
-    const queryRef2 = query(queryRef1, where("UID", "==", id));
-    const querySnapshot = await getDocs(queryRef2);
-    if (querySnapshot.docs.length > 0) {
-      const doc = querySnapshot.docs[0];
-      console.log(doc.data().Name);
-      document.getElementById("userName").textContent =
-        doc.data().firstName + " " + doc.data().lastName;
-    } else {
-      return "Teacher not found";
-    }
-  }
+	async function getuserName(id) {
+		const queryRef1 = collection(firestore, 'users');
+		const queryRef2 = query(queryRef1, where('studentRFID', '==', id));
+		const querySnapshot = await getDocs(queryRef2);
+		if (querySnapshot.docs.length > 0) {
+			const doc = querySnapshot.docs[0];
+			document.getElementById('userName').textContent =
+				doc.data().firstName + ' ' + doc.data().lastName;
+		} else {
+			return 'Student not found';
+		}
+	}
 
   async function sortRecitation() {
     console.log("haha");
@@ -416,7 +415,9 @@
               class="text-center rounded-2xl mt-2 dropdown-content shadow bg-base-100 w-24"
             >
               <li class="rounded-2xl hover:bg-gray-200">
-                <a class=" py-1 flex justify-center font-medium text-md"
+                <a
+                  on:click={(event) => navigate("/Student-Login")}
+                  class=" py-1 flex justify-center font-medium text-sm"
                   >Log out</a
                 >
               </li>
