@@ -260,7 +260,7 @@
 
       title = "";
     } else {
-      alert("Please enter a title before adding notes.");
+      toast.error("Please enter a title before adding notes.");
     }
   }
 
