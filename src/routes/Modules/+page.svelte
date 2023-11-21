@@ -431,18 +431,18 @@
 
   // Call the function to fetch and display notes
 
-	async function getuserName(id) {
-		const queryRef1 = collection(firestore, 'users');
-		const queryRef2 = query(queryRef1, where('studentRFID', '==', id));
-		const querySnapshot = await getDocs(queryRef2);
-		if (querySnapshot.docs.length > 0) {
-			const doc = querySnapshot.docs[0];
-			document.getElementById('userName').textContent =
-				doc.data().firstName + ' ' + doc.data().lastName;
-		} else {
-			return 'Student not found';
-		}
-	}
+  async function getuserName(id) {
+    const queryRef1 = collection(firestore, "users");
+    const queryRef2 = query(queryRef1, where("studentRFID", "==", id));
+    const querySnapshot = await getDocs(queryRef2);
+    if (querySnapshot.docs.length > 0) {
+      const doc = querySnapshot.docs[0];
+      document.getElementById("userName").textContent =
+        doc.data().firstName + " " + doc.data().lastName;
+    } else {
+      return "Student not found";
+    }
+  }
 
   let day1x = "";
   let day2x = "";
@@ -591,13 +591,13 @@
           const inputElement = document.getElementById(`day${day}input`);
 
           const dayData = queriedData[`day${day}`];
-					if (dayData.Share == 'Current Class') {
-						if (dayData) {
-							if (dayData.Link !== null) {
-								inputElement.value = dayData.Link || '';
-							}
-						}
-					}
+          if (dayData.Share == "Current Class") {
+            if (dayData) {
+              if (dayData.Link !== null) {
+                inputElement.value = dayData.Link || "";
+              }
+            }
+          }
         }
       } else {
         console.log("Document does not exist.");
@@ -801,11 +801,12 @@
             tabindex="0"
             class="text-center rounded-2xl mt-2 dropdown-content shadow bg-base-100 w-24"
           >
-          <li class="rounded-2xl hover:bg-gray-200">
-            <a  on:click={(event) => navigate("/Student-Login")} class=" py-1 flex justify-center font-medium text-sm"
-              >Log out</a
-            >
-          </li>
+            <li class="rounded-2xl hover:bg-gray-200">
+              <a
+                on:click={(event) => navigate("/Student-Login")}
+                class=" py-1 flex justify-center font-medium text-sm">Log out</a
+              >
+            </li>
           </ul>
         </button>
       </div>
@@ -814,136 +815,132 @@
 </header>
 
 <div class="mx-6 mt-4">
-    <div
-      class="text-lg font-bold text-center justify-center"
-    >   
+  <div class="text-lg font-bold text-center flex justify-center">
     <select
-    id="classSelection"
-    class="select select-bordered font-medium focus:outline-1 w-full rounded-3xl max-w-xs"
-    bind:value={selecTSub}
-    on:change={(event) => {
-      change();
-    }}
-  >
-    <option disabled selected>Select Class</option>
-
-    {#each docsArray as item1}
-      <option class="rounded-xl" value={item1}>
-        {item1}
-      </option>
-    {/each}
-  </select>
-    <select
-    placeholder="Select Week"
-    id="weekSelector"
-    bind:value={weekStatus}
-    on:change={updateLessonText}
-    class="select select-bordered font-medium focus:outline-1 w-full rounded-3xl max-w-xs"
-  >
-    <option class="rounded-3xl" selected>Week 1</option>
-    <option class="rounded-3xl">Week 2</option>
-    <option class="rounded-3xl">Week 3</option>
-    <option class="rounded-3xl">Week 4</option>
-    <option class="rounded-3xl">Week 5</option>
-    <option class="rounded-3xl">Week 6</option>
-    <option class="rounded-3xl">Week 7</option>
-    <option class="rounded-3xl">Week 8</option>
-  </select>
-
-    </div>
-
-    <div
-      class="w-full flex flex-col mx-auto
-   py-3 outline rounded-3xl outline-gray-50 mt-5"
+      id="classSelection"
+      class="select select-bordered font-medium focus:outline-1 w-full rounded-3xl max-w-xs"
+      bind:value={selecTSub}
+      on:change={(event) => {
+        change();
+      }}
     >
-      <div class="mx-auto w-full mt-3 pr-3 pl-1">
-        <!--WEEK-->
-        <div class="flex flex-row justify-center">
-         
-        </div>
-        <h1 class="text-left mt-2 mb-3 ml-5 text-sm">Day 1</h1>
-        <div class="flex items-center mt-1 pl-4">
-          <input
-            id="day1input"
-            type="text"
-            bind:value={day1x}
-            placeholder="www.googledrive.com/lesson1/"
-            class="input input-bordered w-11/12 focus:border-none cursor-pointer text-sm"
-            readonly
-          />
-          <button
-            class="text-sm text-blue-500 hover:text-blue-400 ml-1"
-            on:click={() => redirectToLink("day1input")}>Open Link</button
-          >
-        </div>
+      <option disabled selected>Select Class</option>
 
-        <h1 class="text-left mt-3 mb-3 ml-5 text-sm">Day 2</h1>
-        <div class="flex items-center mt-1 pl-4">
-          <input
-            bind:value={day2x}
-            id="day2input"
-            type="text"
-            placeholder="www.googledrive.com/lesson1/"
-            class="input input-bordered w-11/12 focus:border-none cursor-pointer text-sm"
-            readonly
-          />
-          <button
-            class="text-sm text-blue-500 hover:text-blue-400 ml-1"
-            on:click={() => redirectToLink("day2input")}>Open Link</button
-          >
-        </div>
+      {#each docsArray as item1}
+        <option class="rounded-xl" value={item1}>
+          {item1}
+        </option>
+      {/each}
+    </select>
 
-        <h1 class="text-left mt-3 mb-3 ml-5 text-sm">Day 3</h1>
-        <div class="flex items-center mt-1 pl-4">
-          <input
-            bind:value={day3x}
-            id="day3input"
-            type="text"
-            placeholder="www.googledrive.com/lesson1/"
-            class="input input-bordered w-11/12 focus.border-none cursor-pointer text-sm"
-            readonly
-          />
-          <button
-            class="text-sm text-blue-500 hover:text-blue-400 ml-1"
-            on:click={() => redirectToLink("day3input")}>Open Link</button
-          >
-        </div>
 
-        <h1 class="text-left mt-3 mb-3 ml-5 text-sm">Day 4</h1>
-        <div class="flex items-center mt-1 pl-4">
-          <input
-            bind:value={day4x}
-            id="day4input"
-            type="text"
-            placeholder="www.googledrive.com/lesson1/"
-            class="input input-bordered w-11/12 focus:border-none cursor-pointer text-sm"
-            readonly
-          />
-          <button
-            class="text-sm text-blue-500 hover:text-blue-400 ml-1"
-            on:click={() => redirectToLink("day4input")}>Open Link</button
-          >
-        </div>
+    <select
+      placeholder="Select Week"
+      id="weekSelector"
+      bind:value={weekStatus}
+      on:change={updateLessonText}
+      class="select select-bordered font-medium focus:outline-1 w-56 mx-2 pl-1 pr-2 text-center rounded-3xl max-w-xs"
+    >
+      <option class="rounded-3xl" selected>Week 1</option>
+      <option class="rounded-3xl">Week 2</option>
+      <option class="rounded-3xl">Week 3</option>
+      <option class="rounded-3xl">Week 4</option>
+      <option class="rounded-3xl">Week 5</option>
+      <option class="rounded-3xl">Week 6</option>
+      <option class="rounded-3xl">Week 7</option>
+      <option class="rounded-3xl">Week 8</option>
+    </select>
+  </div>
 
-        <h1 class="text-left mt-3 mb-3 ml-5 text-sm">Day 5</h1>
-        <div class="flex items-center mt-1 pl-4">
-          <input
-            bind:value={day5x}
-            id="day5input"
-            type="text"
-            placeholder="www.googledrive.com/lesson1/"
-            class="input input-bordered w-11/12 focus.border-none cursor-pointer text-sm"
-            readonly
-          />
-          <button
-            class="text-sm text-blue-500 hover:text-blue-400 ml-1"
-            on:click={() => redirectToLink("day5input")}>Open Link</button
-          >
-        </div>
-        <!--END WEEK-->
+  <div
+    class="w-full flex flex-col mx-auto
+   py-3 outline rounded-3xl outline-gray-50 mt-5"
+  >
+    <div class="mx-auto w-full mt-3 pr-3 pl-1">
+      <!--WEEK-->
+      <div class="flex flex-row justify-center" />
+      <h1 class="text-left mt-2 mb-3 ml-5 text-sm">Day 1</h1>
+      <div class="flex items-center mt-1 pl-4">
+        <input
+          id="day1input"
+          type="text"
+          bind:value={day1x}
+          placeholder="www.googledrive.com/lesson1/"
+          class="input input-bordered w-11/12 focus:border-none cursor-pointer text-sm"
+          readonly
+        />
+        <button
+          class="text-sm text-blue-500 hover:text-blue-400 ml-1"
+          on:click={() => redirectToLink("day1input")}>Open Link</button
+        >
       </div>
 
+      <h1 class="text-left mt-3 mb-3 ml-5 text-sm">Day 2</h1>
+      <div class="flex items-center mt-1 pl-4">
+        <input
+          bind:value={day2x}
+          id="day2input"
+          type="text"
+          placeholder="www.googledrive.com/lesson1/"
+          class="input input-bordered w-11/12 focus:border-none cursor-pointer text-sm"
+          readonly
+        />
+        <button
+          class="text-sm text-blue-500 hover:text-blue-400 ml-1"
+          on:click={() => redirectToLink("day2input")}>Open Link</button
+        >
+      </div>
+
+      <h1 class="text-left mt-3 mb-3 ml-5 text-sm">Day 3</h1>
+      <div class="flex items-center mt-1 pl-4">
+        <input
+          bind:value={day3x}
+          id="day3input"
+          type="text"
+          placeholder="www.googledrive.com/lesson1/"
+          class="input input-bordered w-11/12 focus.border-none cursor-pointer text-sm"
+          readonly
+        />
+        <button
+          class="text-sm text-blue-500 hover:text-blue-400 ml-1"
+          on:click={() => redirectToLink("day3input")}>Open Link</button
+        >
+      </div>
+
+      <h1 class="text-left mt-3 mb-3 ml-5 text-sm">Day 4</h1>
+      <div class="flex items-center mt-1 pl-4">
+        <input
+          bind:value={day4x}
+          id="day4input"
+          type="text"
+          placeholder="www.googledrive.com/lesson1/"
+          class="input input-bordered w-11/12 focus:border-none cursor-pointer text-sm"
+          readonly
+        />
+        <button
+          class="text-sm text-blue-500 hover:text-blue-400 ml-1"
+          on:click={() => redirectToLink("day4input")}>Open Link</button
+        >
+      </div>
+
+      <h1 class="text-left mt-3 mb-3 ml-5 text-sm">Day 5</h1>
+      <div class="flex items-center mt-1 pl-4">
+        <input
+          bind:value={day5x}
+          id="day5input"
+          type="text"
+          placeholder="www.googledrive.com/lesson1/"
+          class="input input-bordered w-11/12 focus.border-none cursor-pointer text-sm"
+          readonly
+        />
+        <button
+          class="text-sm text-blue-500 hover:text-blue-400 ml-1"
+          on:click={() => redirectToLink("day5input")}>Open Link</button
+        >
+      </div>
+      <!--END WEEK-->
     </div>
+  </div>
 </div>
 
 <!-- BOTTOM -->

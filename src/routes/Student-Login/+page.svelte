@@ -82,6 +82,26 @@
   });
 </script>
 
+
+<div class="absolute ml-5 mt-4">
+  <a href="/..">
+    <button class=""
+      ><svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="30"
+        height="30"
+        fill="currentColor"
+        class="bi bi-arrow-left-circle-fill text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500"
+        viewBox="0 0 16 16"
+      >
+        <path
+          d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"
+        />
+      </svg></button
+    >
+  </a>
+</div>
+
 <div class="flex items-center justify-center min-h-screen px-5">
   <div class="container mx-auto">
     <div class="max-w-md mx-auto">

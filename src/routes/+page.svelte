@@ -1,7 +1,8 @@
 
 <div
   class="pb-5 flex items-center justify-center min-h-screen px-5"
->
+>	
+
   <div class="container mx-auto">
     <div class="max-w-md mx-auto">
       <div class="flex justify-center">

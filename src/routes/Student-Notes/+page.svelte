@@ -519,8 +519,8 @@
                         {item1.Title}
                       </h1>
                     </td>
-                    <td class="text-center">
-                      <h1 class="font-medium text-left text-sm">
+                    <td class="">
+                      <h1 class="font-medium text-center text-sm">
                         {item1.Date}
                       </h1>
                     </td>
@@ -554,7 +554,7 @@
               </h1>
             </td>
             <td class="px-2 pb-1 pt-1 w-36">
-              <h1 class="font-medium text-left text-sm">
+              <h1 class="font-medium text-center text-sm">
                 {item1.Date}
               </h1>
             </td>
