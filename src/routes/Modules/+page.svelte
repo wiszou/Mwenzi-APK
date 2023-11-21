@@ -614,13 +614,14 @@
   let studentIDxx;
 
   function redirectToLink(id) {
-    const inputElement = document.getElementById(id);
-    const inputValue = inputElement.value.trim();
-    const link = "https:" + inputValue;
-    if (inputValue) {
-      window.open(link, "_blank");
-    }
+  const inputElement = document.getElementById(id);
+  const inputValue = inputElement.value.trim();
+  const url = `https://${inputValue}`;
+
+  if (inputValue) {
+    window.open(url, "_blank");
   }
+}
 
   async function studentInformation(id) {
     studentIDxx = id;
@@ -832,7 +833,6 @@
         </option>
       {/each}
     </select>
-
 
     <select
       placeholder="Select Week"
