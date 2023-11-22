@@ -849,10 +849,10 @@
       </select>
     </div>
 
-    <div class="flex my-4 items-center flex-col h-5/6 w-full gap-2">
+    <div class="flex items-center flex-col h-5/6 w-full gap-2">
       <!--RANDOMIZER-->
       <div
-        class="w-80 mt-2 h-1/5 min-h-1/6 bg-red-600 bg-opacity-75 rounded-3xl text-center shadow-lg"
+        class="w-80 mt-4 h-1/5 min-h-1/6 bg-red-600 bg-opacity-75 rounded-3xl text-center shadow-lg"
       >
         <div class="flex flex-row mt-2">
           <img src="randomizer.png" class="h-7 mt-1 pl-6" alt="..." />
