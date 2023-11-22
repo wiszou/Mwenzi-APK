@@ -784,7 +784,6 @@
 </script>
 
 <body class="h-screen">
-  <div>
     <header class="text-gray-600 body-font">
       <!-- svelte-ignore a11y-missing-attribute -->
       <div class="mx-6 flex flex-wrap pt-5 flex-col md:flex-row items-center">
@@ -849,10 +848,11 @@
         {/each}
       </select>
     </div>
-    <div class="flex justify-center mt-4 flex-col items-center w-full gap-2">
+
+    <div class="flex my-4 items-center flex-col h-5/6 w-full gap-2">
       <!--RANDOMIZER-->
       <div
-        class="w-80 bg-red-600 bg-opacity-75 rounded-3xl text-center shadow-lg"
+        class="w-80 mt-2 h-1/5 min-h-1/6 bg-red-600 bg-opacity-75 rounded-3xl text-center shadow-lg"
       >
         <div class="flex flex-row mt-2">
           <img src="randomizer.png" class="h-7 mt-1 pl-6" alt="..." />
@@ -861,7 +861,7 @@
         <!--RAN MODAL-->
         <label
           for="randomizer"
-          class="my-4 btn h-20 w-56 bg-white text-red-600 border-transparent hover:bg-red-100 hover:border-none text-base rounded-3xl"
+          class="my-4 btn h-1/2 w-56 bg-white text-red-600 border-transparent hover:bg-red-100 hover:border-none text-base rounded-3xl"
           >Pick</label
         >
         <input type="checkbox" id="randomizer" class="modal-toggle" />
@@ -907,7 +907,7 @@
 
       <!--GROUP CREATOR-->
       <div
-        class="w-80 bg-green-500 bg-opacity-75 rounded-3xl text-center shadow-lg mr-2"
+        class="w-80 h-1/5 bg-green-500 bg-opacity-75 rounded-3xl text-center shadow-lg mr-2"
       >
         <div class="flex flex-row mt-2">
           <img src="group.png" class="h-7 mt-1 pl-6" alt="..." />
@@ -919,7 +919,7 @@
         <!--GRP CREATOR MODAL-->
         <label
           for="GroupCreator"
-          class="my-4 btn h-20 w-56 bg-white text-green-500 border-transparent hover:bg-green-100 hover:border-none text-base rounded-3xl"
+          class="my-4 btn h-1/2 w-56 bg-white text-green-500 border-transparent hover:bg-green-100 hover:border-none text-base rounded-3xl"
           >Create</label
         >
         <input type="checkbox" id="GroupCreator" class="modal-toggle" />
@@ -978,7 +978,7 @@
 
       <!--JAMBOARD-->
       <div
-        class="w-80 bg-purple-500 bg-opacity-75 rounded-3xl text-center shadow-lg mr-2"
+        class="w-80 h-1/5 bg-purple-500 bg-opacity-75 rounded-3xl text-center shadow-lg mr-2"
       >
         <div class="flex flex-row mt-2">
           <img src="jamboard.png" class="h-7 mt-1 pl-6" alt="..." />
@@ -988,7 +988,7 @@
         <!--JAM MODAL-->
         <label
           for="Jamboard"
-          class="my-4 btn h-20 w-56 bg-white text-purple-500 hover:bg-purple-100 border-transparent hover:border-none text-base rounded-3xl"
+          class="my-4 btn h-1/2 w-56 bg-white text-purple-500 hover:bg-purple-100 border-transparent hover:border-none text-base rounded-3xl"
           >Draw</label
         >
         <input type="checkbox" id="Jamboard" class="modal-toggle" />
@@ -1011,7 +1011,7 @@
 
       <!--LESSON PLAN-->
       <div
-        class="w-80 bg-blue-500 bg-opacity-75 rounded-3xl text-center shadow-lg mr-1"
+        class="w-80 h-1/5 bg-blue-500 bg-opacity-75 rounded-3xl text-center shadow-lg mr-1"
       >
         <div class="flex flex-row mt-2">
           <img src="lessonplan.png" class="h-7 mt-1 pl-6" alt="..." />
@@ -1022,7 +1022,7 @@
 
         <label
           for="lessonplan"
-          class="my-4 btn h-20 w-56 bg-white text-blue-500 border-transparent hover:bg-blue-100 hover:border-none text-base rounded-3xl"
+          class="my-4 btn h-1/2 w-56 bg-white text-blue-500 border-transparent hover:bg-blue-100 hover:border-none text-base rounded-3xl"
           >Open</label
         >
         <input type="checkbox" id="lessonplan" class="modal-toggle" />
@@ -1268,7 +1268,6 @@
         </div>
       </div>
     </div>
-  </div>
   <!-- BOTTOM -->
   <div
     id="bottomnav"
